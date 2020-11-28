@@ -14,7 +14,7 @@
             <pubDate>Mon, 23 Nov 2020 20:17:50 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;get_started_3dsctf_2016&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#get_started_3dsctf_2016&#34;&gt;#&lt;/a&gt; get_started_3dsctf_2016&lt;/h2&gt;
 &lt;p&gt;首先例行检查，是 32 位程序，而且栈溢出是可行的&lt;/p&gt;
-&lt;p&gt;![img](file:///C:/Users/link/AppData/Local/Temp/msohtmlclip1/01/clip_image002.jpg)&lt;/p&gt;
+
 &lt;p&gt;接下来进入 IDA 分析，我们可以看到一个明显的栈溢出漏洞&lt;/p&gt;
 &lt;p&gt;![img](file:///C:/Users/link/AppData/Local/Temp/msohtmlclip1/01/clip_image004.jpg)&lt;/p&gt;
 &lt;p&gt;接下来寻找有没有后门函数，发现是有的，main 函数之上有个 get_flag 函数&lt;/p&gt;
