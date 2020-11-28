@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <rss version="2.0">
     <channel>
-        <title>-NIYAH- • Posts by &#34;ctf,pwn&#34; tag</title>
+        <title>-NIYAH- • Posts by &#34;ctf&#34; tag</title>
         <link>http://niyah.cn</link>
         <description>Niyah</description>
         <language>cn</language>
         <pubDate>Mon, 23 Nov 2020 20:17:50 +0800</pubDate>
         <lastBuildDate>Mon, 23 Nov 2020 20:17:50 +0800</lastBuildDate>
-        <category>CTF,PWN</category>
+        <category>CTF</category>
         <item>
             <guid isPermalink="true">http://niyah.cn/2020/11/23/BUUCTF/</guid>
             <title>Buuctf做题记录</title>
             <link>http://niyah.cn/2020/11/23/BUUCTF/</link>
-            <category>CTF,PWN</category>
+            <category>CTF</category>
             <pubDate>Mon, 23 Nov 2020 20:17:50 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;get_started_3dsctf_2016&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#get_started_3dsctf_2016&#34;&gt;#&lt;/a&gt; get_started_3dsctf_2016&lt;/h2&gt;
 &lt;p&gt;首先例行检查，是 32 位程序，而且栈溢出是可行的&lt;/p&gt;
