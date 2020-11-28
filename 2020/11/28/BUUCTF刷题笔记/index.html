@@ -290,7 +290,7 @@
    fetch('https://v1.hitokoto.cn')
     .then(response => response.json())
     .then(data => {
-      document.getElementById("veditor").setAttribute("placeholder",data.hitokoto+"__"+data.from);
+      document.getElementById("veditor").setAttribute("placeholder",data.hitokoto+"--"+data.from);
     })
     .catch(console.error)
 </script>
