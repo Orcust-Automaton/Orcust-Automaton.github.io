@@ -11,7 +11,7 @@
     <category term="栈迁移" />
     <entry>
         <id>http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B03/</id>
-        <title>BUUCTF刷题笔记2</title>
+        <title>BUUCTF刷题笔记3</title>
         <link rel="alternate" href="http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B03/"/>
         <content type="html">&lt;h2 id=&#34;-swig2-&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#-swig2-&#34;&gt;#&lt;/a&gt; &lt;div class=&#34;alert alert-success&#34;&gt;spwn&lt;/div&gt;&lt;/h2&gt;
 &lt;p&gt;本题考察的是栈迁移&lt;/p&gt;
@@ -27,7 +27,6 @@
 &lt;p&gt;4. 使用 system 构造新的 rop 链；&lt;/p&gt;
 &lt;p&gt;5. 第二轮的第一次输入输入新的 rop 链；&lt;/p&gt;
 &lt;p&gt;6. 第一轮的第二次输入进行栈迁移至 bss 来 getshell。&lt;/p&gt;
-&lt;p&gt;脚本：&lt;/p&gt;
 &lt;div class=&#34;panel panel-TYPE&#34;&gt;
     &lt;div class=&#34;panel-title&#34;&gt;EXP&lt;/div&gt;
     &lt;div class=&#34;panel-body&#34;&gt;
