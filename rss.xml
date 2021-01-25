@@ -5,8 +5,8 @@
         <link>http://niyah.cn</link>
         <description>Niyah</description>
         <language>cn</language>
-        <pubDate>Fri, 25 Dec 2020 18:10:27 +0800</pubDate>
-        <lastBuildDate>Fri, 25 Dec 2020 18:10:27 +0800</lastBuildDate>
+        <pubDate>Mon, 25 Jan 2021 18:10:27 +0800</pubDate>
+        <lastBuildDate>Mon, 25 Jan 2021 18:10:27 +0800</lastBuildDate>
         <category>CTF</category>
         <category>PWN</category>
         <category>BUUCTF</category>
@@ -20,7 +20,7 @@
             <category>PWN</category>
             <category>BUUCTF</category>
             <category>栈迁移</category>
-            <pubDate>Fri, 25 Dec 2020 18:10:27 +0800</pubDate>
+            <pubDate>Mon, 25 Jan 2021 18:10:27 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;-swig2-&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#-swig2-&#34;&gt;#&lt;/a&gt; &lt;div class=&#34;alert alert-success&#34;&gt;spwn&lt;/div&gt;&lt;/h2&gt;
 &lt;p&gt;本题考察的是栈迁移&lt;/p&gt;
 &lt;p&gt;进入 IDA 进行分析，我们可以看到本题为我们提供了两个输入：&lt;/p&gt;
