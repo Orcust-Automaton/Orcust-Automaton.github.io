@@ -9,6 +9,7 @@
     <category term="BUUCTF" />
     <category term="rop" />
     <category term="栈迁移" />
+    <category term="格式化字符串" />
     <entry>
         <id>http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B02/</id>
         <title>BUUCTF刷题笔记2</title>

