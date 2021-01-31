@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/favicon.webp">
-  <title>BUUCTF刷题笔记3 | -NIYAH-</title>
+  <title>栈迁移 | -NIYAH-</title>
   <meta name="author" content="Niyah" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -17,14 +17,14 @@
   
   <meta name="description" content="新姿势get">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BUUCTF刷题笔记3">
+<meta property="og:title" content="栈迁移">
 <meta property="og:url" content="http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B03/index.html">
 <meta property="og:site_name" content="-NIYAH-">
 <meta property="og:description" content="新姿势get">
 <meta property="og:locale">
 <meta property="og:image" content="http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B03/%E5%B0%81%E9%9D%A2.webp">
 <meta property="article:published_time" content="2021-01-25T10:10:27.000Z">
-<meta property="article:modified_time" content="2021-01-30T08:25:33.885Z">
+<meta property="article:modified_time" content="2021-01-31T13:27:54.819Z">
 <meta property="article:author" content="Niyah">
 <meta property="article:tag" content="CTF">
 <meta property="article:tag" content="PWN">
@@ -122,10 +122,10 @@
     <article>
         <div class="kratos-hentry kratos-post-inner clearfix">
             <header class="kratos-entry-header">
-                <h1 class="kratos-entry-title text-center">BUUCTF刷题笔记3</h1>
+                <h1 class="kratos-entry-title text-center">栈迁移</h1>
                 
                 <div class="kratos-post-meta text-center">
-                    <span id="/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B03/" class="leancloud_visitors" data-flag-title="BUUCTF刷题笔记3">
+                    <span id="/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B03/" class="leancloud_visitors" data-flag-title="栈迁移">
                         <i class="fa fa-calendar"></i> 2021-01-25
                         <i class="fa fa-folder"></i> 分类于 <a class="label-link" href="/categories/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">PWN刷题笔记</a>
                         <i class="fa fa-user"></i> 作者 Niyah
@@ -259,7 +259,7 @@ pop ebp</p>
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
             const hostUrl       = "http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B03/";
-            const title         = "「BUUCTF刷题笔记3」";
+            const title         = "「栈迁移」";
             const excerpt       = `新姿势get`;
             let _URL;
             switch (dest) {
@@ -282,7 +282,7 @@ pop ebp</p>
                         <a class="tag-none-link" href="/tags/BUUCTF/" rel="tag">BUUCTF</a>, <a class="tag-none-link" href="/tags/CTF/" rel="tag">CTF</a>, <a class="tag-none-link" href="/tags/PWN/" rel="tag">PWN</a>, <a class="tag-none-link" href="/tags/%E6%A0%88%E8%BF%81%E7%A7%BB/" rel="tag">栈迁移</a>
                     </div>
                     <div class="pull-date">
-                    <span>最后编辑：2021-01-30</span>
+                    <span>最后编辑：2021-01-31</span>
                     </div>
                 </div>
             </footer>
@@ -291,12 +291,12 @@ pop ebp</p>
             <nav class="navigation post-navigation clearfix" role="navigation">
                 
                 <div class="nav-previous clearfix">
-                    <a title=" BUUCTF刷题笔记2" href="/PWN刷题笔记/BUUCTF刷题笔记2/">&lt; 上一篇</a>
+                    <a title=" 基本ROP" href="/PWN刷题笔记/BUUCTF刷题笔记2/">&lt; 上一篇</a>
                 </div>
                 
                 
                 <div class="nav-next clearfix">
-                    <a title=" BUUCTF刷题笔记4" href="/PWN刷题笔记/BUUCTF刷题笔记4/">下一篇 &gt;</a>
+                    <a title=" 格式化字符串" href="/PWN刷题笔记/BUUCTF刷题笔记4/">下一篇 &gt;</a>
                 </div>
                 
             </nav>
@@ -397,25 +397,25 @@ pop ebp</p>
         
           
           
-            <a class="list-group-item" href="/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/"><i class="fa  fa-book"></i> BUUCTF刷题笔记4</a>
+            <a class="list-group-item" href="/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/"><i class="fa  fa-book"></i> 格式化字符串</a>
             
           
         
           
           
-            <a class="list-group-item" href="/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B03/"><i class="fa  fa-book"></i> BUUCTF刷题笔记3</a>
+            <a class="list-group-item" href="/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B03/"><i class="fa  fa-book"></i> 栈迁移</a>
             
           
         
           
           
-            <a class="list-group-item" href="/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B02/"><i class="fa  fa-book"></i> BUUCTF刷题笔记2</a>
+            <a class="list-group-item" href="/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B02/"><i class="fa  fa-book"></i> 基本ROP</a>
             
           
         
           
           
-            <a class="list-group-item" href="/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B01/"><i class="fa  fa-book"></i> BUUCTF刷题笔记1</a>
+            <a class="list-group-item" href="/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B01/"><i class="fa  fa-book"></i> 基本ROP</a>
             
           
         

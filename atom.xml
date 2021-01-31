@@ -12,7 +12,7 @@
     <category term="格式化字符串" />
     <entry>
         <id>http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/</id>
-        <title>BUUCTF刷题笔记4</title>
+        <title>格式化字符串</title>
         <link rel="alternate" href="http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/"/>
         <content type="html">&lt;h2 id=&#34;r2t4&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#r2t4&#34;&gt;#&lt;/a&gt; r2t4&lt;/h2&gt;
 &lt;p&gt;本题是个格式化字符串漏洞&lt;/p&gt;
@@ -97,7 +97,7 @@
     </entry>
     <entry>
         <id>http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B03/</id>
-        <title>BUUCTF刷题笔记3</title>
+        <title>栈迁移</title>
         <link rel="alternate" href="http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B03/"/>
         <content type="html">&lt;h2 id=&#34;spwn栈-bss&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#spwn栈-bss&#34;&gt;#&lt;/a&gt; spwn（栈 -&amp;gt;bss）&lt;/h2&gt;
 &lt;p&gt;本题考察的是栈迁移&lt;/p&gt;
@@ -151,7 +151,7 @@ pop ebp&lt;/p&gt;
     </entry>
     <entry>
         <id>http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B02/</id>
-        <title>BUUCTF刷题笔记2</title>
+        <title>基本ROP</title>
         <link rel="alternate" href="http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B02/"/>
         <content type="html">&lt;h2 id=&#34;ciscn_2019_c_1&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#ciscn_2019_c_1&#34;&gt;#&lt;/a&gt; ciscn_2019_c_1&lt;/h2&gt;
 &lt;p&gt;首先我们对程序进行检查，64 位程序且只开了栈不可执行，那么我们找到溢出点便可以进行溢出&lt;/p&gt;
@@ -181,7 +181,7 @@ pop ebp&lt;/p&gt;
     </entry>
     <entry>
         <id>http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B01/</id>
-        <title>BUUCTF刷题笔记1</title>
+        <title>基本ROP</title>
         <link rel="alternate" href="http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B01/"/>
         <content type="html">&lt;h2 id=&#34;get_started_3dsctf_2016&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#get_started_3dsctf_2016&#34;&gt;#&lt;/a&gt; get_started_3dsctf_2016&lt;/h2&gt;
 &lt;p&gt;首先例行检查，是 32 位程序，而且栈溢出是可行的&lt;/p&gt;

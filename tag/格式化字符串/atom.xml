@@ -12,7 +12,7 @@
     <category term="格式化字符串" />
     <entry>
         <id>http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/</id>
-        <title>BUUCTF刷题笔记4</title>
+        <title>格式化字符串</title>
         <link rel="alternate" href="http://niyah.cn/PWN%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/"/>
         <content type="html">&lt;h2 id=&#34;r2t4&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#r2t4&#34;&gt;#&lt;/a&gt; r2t4&lt;/h2&gt;
 &lt;p&gt;本题是个格式化字符串漏洞&lt;/p&gt;
