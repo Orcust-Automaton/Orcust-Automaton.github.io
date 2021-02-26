@@ -124,7 +124,7 @@ pop ebp&lt;/p&gt;
         <id>http://niyah.cn/PWNCTF/%E5%9F%BA%E6%9C%ACROP/</id>
         <title>基本ROP</title>
         <link rel="alternate" href="http://niyah.cn/PWNCTF/%E5%9F%BA%E6%9C%ACROP/"/>
-        <content type="html">&lt;p&gt;&lt;img src=&#34;back-1.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+        <content type="html">&lt;p&gt;&lt;img src=&#34;background/back-1.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
 &lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
 &lt;h2 id=&#34;get_started_3dsctf_2016&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#get_started_3dsctf_2016&#34;&gt;#&lt;/a&gt; get_started_3dsctf_2016&lt;/h2&gt;
 &lt;p&gt;首先例行检查，是 32 位程序，而且栈溢出是可行的&lt;/p&gt;
