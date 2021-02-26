@@ -7,6 +7,7 @@
     <category term="CTF" />
     <category term="PWN" />
     <category term="BUUCTF" />
+    <category term="rop" />
     <category term="栈迁移" />
     <category term="格式化字符串" />
     <entry>

@@ -10,6 +10,7 @@
         <category>CTF</category>
         <category>PWN</category>
         <category>BUUCTF</category>
+        <category>rop</category>
         <category>栈迁移</category>
         <category>格式化字符串</category>
         <item>

