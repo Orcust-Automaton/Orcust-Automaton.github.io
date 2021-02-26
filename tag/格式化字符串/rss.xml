@@ -10,13 +10,12 @@
         <category>CTF</category>
         <category>PWN</category>
         <category>BUUCTF</category>
-        <category>rop</category>
         <category>栈迁移</category>
         <category>格式化字符串</category>
         <item>
-            <guid isPermalink="true">http://niyah.cn/BUUCTF/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/</guid>
+            <guid isPermalink="true">http://niyah.cn/BUUCTF/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
             <title>格式化字符串</title>
-            <link>http://niyah.cn/BUUCTF/BUUCTF%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B04/</link>
+            <link>http://niyah.cn/BUUCTF/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
             <category>CTF</category>
             <category>PWN</category>
             <category>BUUCTF</category>
@@ -69,17 +68,13 @@
 &lt;p&gt;这题是有 canary 的，但是没有关系，检查 canary 后会执行那个 **__stack_chk_fail** 函数，那么我们利用格式化字符串修改这个函数的地址为后门函数地址就可以输出 flag 了&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;​	backdoor : 0x0000000000400626&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;​	__stack_chk_fail : 0x0000000000601038&lt;/p&gt;
+&lt;p&gt;​    __stack_chk_fail : 0x0000000000601038&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;我们需要将第二个地址的值改为第一个地址，这里有两种方式&lt;/p&gt;
 &lt;p&gt;我比较推荐单地址修改的方法，因为一个地址对应在我们看来的两位，而这些地址的存放方式是小端序，所以 0x601038 表示的是最后两位 0x60103A 表示的是倒数第三和倒数第四位&lt;/p&gt;
 &lt;p&gt;那么我们按照单字节修改的方式可以将地址划分为三块&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;​	60 10 38&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
 &lt;p&gt;​	40 06 26&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;那么我们从最小的开始修改，即 0x06，我们使用 %6c 输出再使用 % x$hhn 修改格式化字符串的第 x 个参数，这个参数即__stack_chk_fail +1&lt;/p&gt;
