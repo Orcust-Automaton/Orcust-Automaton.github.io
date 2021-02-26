@@ -131,8 +131,7 @@ pop ebp&lt;/p&gt;
             <category>PWN</category>
             <category>BUUCTF</category>
             <pubDate>Sat, 28 Nov 2020 18:15:22 +0800</pubDate>
-            <description><![CDATA[ &lt;center&gt;&lt;img src=&#34;back-1.png&#34;&gt;&lt;/center&gt;
-&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
+            <description><![CDATA[ &lt;!-- more --&gt;
 &lt;h2 id=&#34;get_started_3dsctf_2016&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#get_started_3dsctf_2016&#34;&gt;#&lt;/a&gt; get_started_3dsctf_2016&lt;/h2&gt;
 &lt;p&gt;首先例行检查，是 32 位程序，而且栈溢出是可行的&lt;/p&gt;
 &lt;center&gt;&lt;img src=&#34;1.png&#34;&gt;&lt;/center&gt;
