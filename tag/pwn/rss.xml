@@ -22,7 +22,7 @@
             <category>格式化字符串</category>
             <pubDate>Sat, 30 Jan 2021 14:10:27 +0800</pubDate>
             <description><![CDATA[ &lt;figure class=&#34;highlight c&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;%[parameter][flags][field width][.precision][length]type&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;!-- more --&gt;
+&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
 &lt;h2 id=&#34;r2t4&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#r2t4&#34;&gt;#&lt;/a&gt; r2t4&lt;/h2&gt;
 &lt;p&gt;本题是个格式化字符串漏洞&lt;/p&gt;
 &lt;p&gt;这里我们了解一下格式化字符串的格式，其基本格式如下&lt;/p&gt;
