@@ -10,9 +10,9 @@
     <category term="栈迁移" />
     <category term="格式化字符串" />
     <entry>
-        <id>http://niyah.cn/PWNCTF/%E6%A0%88%E8%BF%81%E7%A7%BB/</id>
+        <id>http://niyah.cn/CTF/%E6%A0%88%E8%BF%81%E7%A7%BB/</id>
         <title>栈迁移</title>
-        <link rel="alternate" href="http://niyah.cn/PWNCTF/%E6%A0%88%E8%BF%81%E7%A7%BB/"/>
+        <link rel="alternate" href="http://niyah.cn/CTF/%E6%A0%88%E8%BF%81%E7%A7%BB/"/>
         <content type="html">&lt;h2 id=&#34;spwn栈-bss&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#spwn栈-bss&#34;&gt;#&lt;/a&gt; spwn（栈 -&amp;gt;bss）&lt;/h2&gt;
 &lt;p&gt;本题考察的是栈迁移&lt;/p&gt;
 &lt;p&gt;进入 IDA 进行分析，我们可以看到本题为我们提供了两个输入：&lt;/p&gt;

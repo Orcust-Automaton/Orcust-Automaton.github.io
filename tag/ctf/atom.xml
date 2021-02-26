@@ -10,9 +10,9 @@
     <category term="栈迁移" />
     <category term="格式化字符串" />
     <entry>
-        <id>http://niyah.cn/BUUCTF/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/</id>
+        <id>http://niyah.cn/CTF/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/</id>
         <title>格式化字符串</title>
-        <link rel="alternate" href="http://niyah.cn/BUUCTF/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+        <link rel="alternate" href="http://niyah.cn/CTF/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
         <content type="html">&lt;h2 id=&#34;r2t4&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#r2t4&#34;&gt;#&lt;/a&gt; r2t4&lt;/h2&gt;
 &lt;p&gt;本题是个格式化字符串漏洞&lt;/p&gt;
 &lt;p&gt;这里我们了解一下格式化字符串的格式，其基本格式如下&lt;/p&gt;
@@ -81,9 +81,9 @@
         <updated>2021-01-30T06:10:27.000Z</updated>
     </entry>
     <entry>
-        <id>http://niyah.cn/PWNCTF/%E6%A0%88%E8%BF%81%E7%A7%BB/</id>
+        <id>http://niyah.cn/CTF/%E6%A0%88%E8%BF%81%E7%A7%BB/</id>
         <title>栈迁移</title>
-        <link rel="alternate" href="http://niyah.cn/PWNCTF/%E6%A0%88%E8%BF%81%E7%A7%BB/"/>
+        <link rel="alternate" href="http://niyah.cn/CTF/%E6%A0%88%E8%BF%81%E7%A7%BB/"/>
         <content type="html">&lt;h2 id=&#34;spwn栈-bss&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#spwn栈-bss&#34;&gt;#&lt;/a&gt; spwn（栈 -&amp;gt;bss）&lt;/h2&gt;
 &lt;p&gt;本题考察的是栈迁移&lt;/p&gt;
 &lt;p&gt;进入 IDA 进行分析，我们可以看到本题为我们提供了两个输入：&lt;/p&gt;
@@ -121,13 +121,12 @@ pop ebp&lt;/p&gt;
         <updated>2021-01-25T10:10:27.000Z</updated>
     </entry>
     <entry>
-        <id>http://niyah.cn/PWNCTF/%E5%9F%BA%E6%9C%ACROP/</id>
+        <id>http://niyah.cn/CTF/%E5%9F%BA%E6%9C%ACROP/</id>
         <title>基本ROP</title>
-        <link rel="alternate" href="http://niyah.cn/PWNCTF/%E5%9F%BA%E6%9C%ACROP/"/>
-        <content type="html">&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
-&lt;h2 id=&#34;get_started_3dsctf_2016&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#get_started_3dsctf_2016&#34;&gt;#&lt;/a&gt; get_started_3dsctf_2016&lt;/h2&gt;
+        <link rel="alternate" href="http://niyah.cn/CTF/%E5%9F%BA%E6%9C%ACROP/"/>
+        <content type="html">&lt;h2 id=&#34;get_started_3dsctf_2016&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#get_started_3dsctf_2016&#34;&gt;#&lt;/a&gt; get_started_3dsctf_2016&lt;/h2&gt;
 &lt;p&gt;首先例行检查，是 32 位程序，而且栈溢出是可行的&lt;/p&gt;
-&lt;center&gt;&lt;img src=&#34;基本ROP/1.png&#34;&gt;&lt;/center&gt;
+&lt;p&gt;&lt;img src=&#34;%E5%9F%BA%E6%9C%ACrop/1.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
 &lt;p&gt;接下来进入 IDA 分析，我们可以看到一个明显的栈溢出漏洞&lt;/p&gt;
 &lt;center&gt;&lt;img src=&#34;2.png&#34;&gt;&lt;/center&gt;
 &lt;p&gt;接下来寻找有没有后门函数，发现是有的，main 函数之上有个 get_flag 函数&lt;/p&gt;
