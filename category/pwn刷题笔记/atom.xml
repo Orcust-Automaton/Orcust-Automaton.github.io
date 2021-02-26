@@ -124,10 +124,10 @@ pop ebp&lt;/p&gt;
         <id>http://niyah.cn/PWNCTF/%E5%9F%BA%E6%9C%ACROP/</id>
         <title>基本ROP</title>
         <link rel="alternate" href="http://niyah.cn/PWNCTF/%E5%9F%BA%E6%9C%ACROP/"/>
-        <content type="html">&lt;!-- more --&gt;
+        <content type="html">&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
 &lt;h2 id=&#34;get_started_3dsctf_2016&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#get_started_3dsctf_2016&#34;&gt;#&lt;/a&gt; get_started_3dsctf_2016&lt;/h2&gt;
 &lt;p&gt;首先例行检查，是 32 位程序，而且栈溢出是可行的&lt;/p&gt;
-&lt;center&gt;&lt;img src=&#34;1.png&#34;&gt;&lt;/center&gt;
+&lt;center&gt;&lt;img src=&#34;基本ROP/1.png&#34;&gt;&lt;/center&gt;
 &lt;p&gt;接下来进入 IDA 分析，我们可以看到一个明显的栈溢出漏洞&lt;/p&gt;
 &lt;center&gt;&lt;img src=&#34;2.png&#34;&gt;&lt;/center&gt;
 &lt;p&gt;接下来寻找有没有后门函数，发现是有的，main 函数之上有个 get_flag 函数&lt;/p&gt;
