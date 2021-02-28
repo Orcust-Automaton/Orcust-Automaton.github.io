@@ -5,8 +5,8 @@
         <link>http://niyah.cn</link>
         <description>Niyah</description>
         <language>cn</language>
-        <pubDate>Fri, 26 Feb 2021 14:10:27 +0800</pubDate>
-        <lastBuildDate>Fri, 26 Feb 2021 14:10:27 +0800</lastBuildDate>
+        <pubDate>Sun, 28 Feb 2021 14:10:27 +0800</pubDate>
+        <lastBuildDate>Sun, 28 Feb 2021 14:10:27 +0800</lastBuildDate>
         <category>CTF</category>
         <category>PWN</category>
         <category>BUUCTF</category>
@@ -20,9 +20,10 @@
             <link>http://niyah.cn/CTF/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE/</link>
             <category>CTF</category>
             <category>PWN</category>
-            <pubDate>Fri, 26 Feb 2021 14:10:27 +0800</pubDate>
+            <pubDate>Sun, 28 Feb 2021 14:10:27 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
-&lt;p&gt;为防止自己痴呆写的虚拟机 pwn 环境配置，来源于网上各种教程&lt;/p&gt;
+&lt;p&gt;为防止自己痴呆写的虚拟机 pwn 环境配置&lt;/p&gt;
+&lt;p&gt;来源于网上各种教程&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
 &lt;h1 id=&#34;基本环境&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#基本环境&#34;&gt;#&lt;/a&gt; 基本环境&lt;/h1&gt;
