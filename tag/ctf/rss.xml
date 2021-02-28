@@ -27,7 +27,7 @@
 &lt;/blockquote&gt;
 &lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
 &lt;h1 id=&#34;基本环境&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#基本环境&#34;&gt;#&lt;/a&gt; 基本环境&lt;/h1&gt;
-&lt;h3 id=&#34;更换国内源&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#更换国内源&#34;&gt;#&lt;/a&gt; 更换国内源&lt;/h3&gt;
+&lt;h2 id=&#34;更换国内源&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#更换国内源&#34;&gt;#&lt;/a&gt; 更换国内源&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;备份原来的源（一定要备份）&lt;/li&gt;
 &lt;/ul&gt;
@@ -44,9 +44,9 @@
 &lt;li&gt;更新，修复&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get update&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get -f install&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get upgrade&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&#34;安装python2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#安装python2&#34;&gt;#&lt;/a&gt; 安装 Python2&lt;/h3&gt;
+&lt;h2 id=&#34;安装python2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#安装python2&#34;&gt;#&lt;/a&gt; 安装 Python2&lt;/h2&gt;
 &lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt install python2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&#34;安装zsh&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#安装zsh&#34;&gt;#&lt;/a&gt; 安装 zsh&lt;/h3&gt;
+&lt;h2 id=&#34;安装zsh&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#安装zsh&#34;&gt;#&lt;/a&gt; 安装 zsh&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;安装 zsh&lt;/li&gt;
 &lt;/ul&gt;
@@ -75,12 +75,12 @@
 &lt;/ul&gt;
 &lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;chsh -l &lt;span class=&#34;comment&#34;&gt;#列出可用的shell&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;chsh -s /usr/bin/zsh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h1 id=&#34;pwn环境配置&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#pwn环境配置&#34;&gt;#&lt;/a&gt; Pwn 环境配置&lt;/h1&gt;
-&lt;h3 id=&#34;执行一键安装脚本&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#执行一键安装脚本&#34;&gt;#&lt;/a&gt; 执行一键安装脚本&lt;/h3&gt;
+&lt;h1 id=&#34;pwn环境&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#pwn环境&#34;&gt;#&lt;/a&gt; Pwn 环境&lt;/h1&gt;
+&lt;h2 id=&#34;执行一键安装脚本&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#执行一键安装脚本&#34;&gt;#&lt;/a&gt; 执行一键安装脚本&lt;/h2&gt;
 &lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;wget https://raw.githubusercontent.com/giantbranch/pwn-env-init/master/pwn_init_py2.sh&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;chmod +x pwn_init_py2.sh&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo ./pwn_init_py2.sh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&#34;安装libcsearcher&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#安装libcsearcher&#34;&gt;#&lt;/a&gt; 安装 LibcSearcher&lt;/h3&gt;
+&lt;h2 id=&#34;安装libcsearcher&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#安装libcsearcher&#34;&gt;#&lt;/a&gt; 安装 LibcSearcher&lt;/h2&gt;
 &lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; https://github.com/lieanu/LibcSearcher.git&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; LibcSearcher&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo python setup.py develop&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&#34;安装pwndbg-pwngdb&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#安装pwndbg-pwngdb&#34;&gt;#&lt;/a&gt; 安装 Pwndbg、Pwngdb&lt;/h3&gt;
+&lt;h2 id=&#34;安装pwndbg-pwngdb&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#安装pwndbg-pwngdb&#34;&gt;#&lt;/a&gt; 安装 Pwndbg、Pwngdb&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;安装 pwndbg、pwngdb&lt;/li&gt;
 &lt;/ul&gt;
