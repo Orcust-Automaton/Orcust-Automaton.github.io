@@ -13,6 +13,7 @@
         <category>rop</category>
         <category>栈迁移</category>
         <category>格式化字符串</category>
+        <category>堆</category>
         <item>
             <guid isPermalink="true">http://niyah.cn/CTF/%E5%A0%86%E6%BA%A2%E5%87%BA/</guid>
             <title>堆溢出</title>
@@ -20,7 +21,7 @@
             <category>CTF</category>
             <category>PWN</category>
             <category>BUUCTF</category>
-            <category>格式化字符串</category>
+            <category>堆</category>
             <pubDate>Fri, 26 Feb 2021 14:10:27 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
 &lt;p&gt;堆溢出入门级别的题目&lt;/p&gt;

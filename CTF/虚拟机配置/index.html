@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="cn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>虚拟机pwn环境配置 | -NIYAH-</title><script src="https://cdn.bootcss.com/valine/1.4.4/Valine.min.js"></script><link rel="stylesheet" href="/css/arknights.css"><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/styles/atom-one-dark-reasonable.min.css"><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="-NIYAH-" type="application/atom+xml">
+</head><body><header><nav><a href="/">Home</a><a href="/about/">About</a><a href="/friends/">Friends</a><a href="/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><div id="post-info"><span>date:<time datetime="2021-02-26T06:10:27.000Z" id="date"> 2021-02-26</time></span><br><span>updated:<time datetime="2021-02-28T11:34:50.945Z" id="updated"> 2021-02-28</time></span></div><h1>虚拟机pwn环境配置</h1><hr></div><div id="post-content"><h1 id="基本环境"><a class="markdownIt-Anchor" href="#基本环境">#</a> 基本环境</h1>
+<h3 id="一-更换国内源"><a class="markdownIt-Anchor" href="#一-更换国内源">#</a> 一、更换国内源</h3>
+<ul>
+<li>1. 备份原来的源（一定要备份）</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources_init.list</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2. 更换源</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<ul>
+<li>3. 将下列代码复制进去</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+<ul>
+<li>4. 更新，修复</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -f install</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+<h3 id="二-安装python2"><a class="markdownIt-Anchor" href="#二-安装python2">#</a> 二、安装 Python2</h3>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install python2</span><br></pre></td></tr></table></figure>
+<h3 id="三-安装zsh"><a class="markdownIt-Anchor" href="#三-安装zsh">#</a> 三、安装 zsh</h3>
+<ul>
+<li>1. 安装 zsh</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install zsh</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2. 安装 on-my-zsh</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://gitee.com/mirrors/oh-my-zsh/raw/master/tools/install.sh</span><br><span class="line"></span><br><span class="line">chmod +x install.sh</span><br><span class="line"></span><br><span class="line">./install.sh</span><br></pre></td></tr></table></figure>
+<ul>
+<li>3. 配置 zsh</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME=<span class="string">&quot;ys&quot;</span></span><br><span class="line">plugins=(git zsh-syntax-highlighting zsh-autosuggestions)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> .zshrc</span><br></pre></td></tr></table></figure>
+<ul>
+<li>4. 安装插件</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-syntax-highlighting</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-autosuggestions</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> .zshrc</span><br></pre></td></tr></table></figure>
+<ul>
+<li>5. 安装 powerline 字体</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/powerline/fonts</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./install.sh</span><br></pre></td></tr></table></figure>
+<ul>
+<li>6. 切换默认终端</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -l <span class="comment">#列出可用的shell</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /usr/bin/zsh</span><br></pre></td></tr></table></figure>
+<h1 id="pwn环境配置"><a class="markdownIt-Anchor" href="#pwn环境配置">#</a> Pwn 环境配置</h1>
+<h3 id="一-执行一键安装脚本"><a class="markdownIt-Anchor" href="#一-执行一键安装脚本">#</a> 一、执行一键安装脚本</h3>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/giantbranch/pwn-env-init/master/pwn_init_py2.sh</span><br><span class="line">chmod +x pwn_init_py2.sh</span><br><span class="line">sudo ./pwn_init_py2.sh</span><br></pre></td></tr></table></figure>
+<h3 id="二-安装libcsearcher"><a class="markdownIt-Anchor" href="#二-安装libcsearcher">#</a> 二、安装 LibcSearcher</h3>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/lieanu/LibcSearcher.git</span><br><span class="line"><span class="built_in">cd</span> LibcSearcher</span><br><span class="line">sudo python setup.py develop</span><br></pre></td></tr></table></figure>
+<h3 id="三-安装pwndbg-pwngdb"><a class="markdownIt-Anchor" href="#三-安装pwndbg-pwngdb">#</a> 三、安装 Pwndbg、Pwngdb</h3>
+<ul>
+<li>1. 安装 pwndbg、pwngdb</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pwndbg/pwndbg</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/scwuaptx/Pwngdb.git </span><br><span class="line"><span class="built_in">cd</span> pwndbg</span><br><span class="line">sudo ./setup.sh</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2. 切换 gdb 默认插件</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">cp ~/Pwngdb/.gdbinit ~/</span><br><span class="line">gedit ~/.gdbinit</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/pwndbg/gdbinit.py</span><br><span class="line"><span class="built_in">source</span> ~/Pwngdb/pwngdb.py</span><br><span class="line"><span class="built_in">source</span> ~/Pwngdb/angelheap/gdbinit.py</span><br></pre></td></tr></table></figure><div id="paginator"></div></div><div id="post-footer"><hr><a href="/CTF/%E5%A0%86%E6%BA%A2%E5%87%BA/">← Prev 堆溢出</a><span style="color: #fe2"> | </span><a href="/CTF/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/">格式化字符串 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><details id="reward"><summary>打赏</summary><div id="alipay"><span>支付宝 | Alipay</span><br><img src="/img/Alipay.png"></div><div id="wechat"><span>微信 | WeChat</span><br><img src="/img/WeChat.png"></div></details><div id="Valine"></div><script>new Valine({
+ el: '#Valine'
+ , appId: 'BxfwtJSIufSEhHcYRNUxBFjJ-gzGzoHsz'
+ , appKey: '51wd7rcwQdYtBJ9oRHucwGYm'
+ , placeholder: '此条评论委托企鹅物流发送'
+})</script></div></article><aside><div id="about"><a href="/" id="logo"><img src="/img/logo.png" alt="Logo"></a><h1 id="Dr"><a href="/"> Dr.Niyah</a></h1><section id="total"><a id="total-archives" href="/archives"><span class="total-title">Archives Total:</span><span class="total-number">5</span></a><div id="total-tags"><span class="total-title">Tags:</span><span class="total-number">7</span></div><div id="total-categories"><span class="total-title">Categories:</span><span class="total-number">2</span></div></section></div><div id="aside-block"><h1>INDEX</h1><div id="post-index"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text"> 基本环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E6%9B%B4%E6%8D%A2%E5%9B%BD%E5%86%85%E6%BA%90"><span class="toc-number">1.0.1.</span> <span class="toc-text"> 一、更换国内源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E5%AE%89%E8%A3%85python2"><span class="toc-number">1.0.2.</span> <span class="toc-text"> 二、安装 Python2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-%E5%AE%89%E8%A3%85zsh"><span class="toc-number">1.0.3.</span> <span class="toc-text"> 三、安装 zsh</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#pwn%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text"> Pwn 环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E6%89%A7%E8%A1%8C%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC"><span class="toc-number">2.0.1.</span> <span class="toc-text"> 一、执行一键安装脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E5%AE%89%E8%A3%85libcsearcher"><span class="toc-number">2.0.2.</span> <span class="toc-text"> 二、安装 LibcSearcher</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-%E5%AE%89%E8%A3%85pwndbg-pwngdb"><span class="toc-number">2.0.3.</span> <span class="toc-text"> 三、安装 Pwndbg、Pwngdb</span></a></li></ol></li></ol></li></ol></div></div><footer><nobr><span class="text-title">©</span><span class="text-content">2020 to 2021</span></nobr><wbr><nobr><span class="text-title">ICP</span><span class="text-content">——暂时没有——</span></nobr><wbr><wbr><nobr>published with&nbsp;<a target="_blank" rel="noopener" href="http://hexo.io">Hexo&nbsp;</a></nobr><wbr><nobr>Theme&nbsp;<a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknight&nbsp;</a></nobr><wbr><nobr>by&nbsp;<a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/arknights.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script></body></html><div class="aplayer" data-id="5474434735" data-server="netease" data-type="playlist" data-fixed="true" data-listFolded="false" data-order="random" data-preload="none"></div><link rel="stylesheet" href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css"><script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
