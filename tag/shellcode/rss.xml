@@ -15,6 +15,7 @@
         <category>格式化字符串</category>
         <category>堆</category>
         <category>shellcode</category>
+        <category>unlink</category>
         <item>
             <guid isPermalink="true">http://niyah.cn/CTF/shellcode%E4%BE%8B%E9%A2%98/</guid>
             <title>shellcode例题</title>

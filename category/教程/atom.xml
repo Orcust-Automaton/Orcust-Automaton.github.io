@@ -12,6 +12,7 @@
     <category term="格式化字符串" />
     <category term="堆" />
     <category term="shellcode" />
+    <category term="unlink" />
     <entry>
         <id>http://niyah.cn/CTF/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE/</id>
         <title>虚拟机pwn环境配置</title>

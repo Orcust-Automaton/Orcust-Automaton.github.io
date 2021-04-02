@@ -12,6 +12,7 @@
     <category term="格式化字符串" />
     <category term="堆" />
     <category term="shellcode" />
+    <category term="unlink" />
     <entry>
         <id>http://niyah.cn/CTF/%E5%A0%86%E6%BA%A2%E5%87%BA/</id>
         <title>堆溢出</title>

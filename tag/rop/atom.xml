@@ -12,6 +12,7 @@
     <category term="格式化字符串" />
     <category term="堆" />
     <category term="shellcode" />
+    <category term="unlink" />
     <entry>
         <id>http://niyah.cn/CTF/%E5%9F%BA%E6%9C%ACROP/</id>
         <title>基本ROP</title>

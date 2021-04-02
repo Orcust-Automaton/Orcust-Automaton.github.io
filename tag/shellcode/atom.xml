@@ -12,6 +12,7 @@
     <category term="格式化字符串" />
     <category term="堆" />
     <category term="shellcode" />
+    <category term="unlink" />
     <entry>
         <id>http://niyah.cn/CTF/shellcode%E4%BE%8B%E9%A2%98/</id>
         <title>shellcode例题</title>
