@@ -95,6 +95,7 @@
         <category term="PWN" />
         <category term="BUUCTF" />
         <category term="格式化字符串" />
+        <category term="堆" />
         <category term="unlink" />
         <updated>2021-04-02T14:10:27.000Z</updated>
     </entry>
