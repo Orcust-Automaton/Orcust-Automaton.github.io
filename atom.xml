@@ -38,7 +38,7 @@
 &lt;h2 id=&#34;unlink&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#unlink&#34;&gt;#&lt;/a&gt; Unlink&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;我们先申请 4 个堆块，既然要造成&lt;sup class=&#34;footnote-ref&#34;&gt;&lt;a href=&#34;#fn1&#34; id=&#34;fnref1&#34;&gt;[1]&lt;/a&gt;&lt;/sup&gt;，那么 free 的那个大小应该至少属于 unsortedbin，大小大于 0x88 就可以，这里我们申请 0x98 大小的堆块，刚好就可以溢出到下一个堆块的 size 位&lt;/p&gt;
+&lt;p&gt;我们先申请 4 个堆块，既然要造成 Unlink&lt;sup class=&#34;footnote-ref&#34;&gt;&lt;a href=&#34;#fn1&#34; id=&#34;fnref1&#34;&gt;[1]&lt;/a&gt;&lt;/sup&gt;，那么 free 的那个大小应该至少属于 unsortedbin，大小大于 0x88 就可以，这里我们申请 0x98 大小的堆块，刚好就可以溢出到下一个堆块的 size 位&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;改写一个 unsortedbin 之前的堆块，伪造出&lt;kbd&gt;fake_chunk&lt;/kbd&gt;的结构（在一个正常堆块里伪造出一个 bin 结构）&lt;/p&gt;
@@ -86,7 +86,7 @@
 &lt;hr class=&#34;footnotes-sep&#34;&gt;
 &lt;section class=&#34;footnotes&#34;&gt;
 &lt;ol class=&#34;footnotes-list&#34;&gt;
-&lt;li id=&#34;fn1&#34; class=&#34;footnote-item&#34;&gt;&lt;p&gt;[一篇博客弄懂 Unlink] [&lt;a href=&#34;https://blog.csdn.net/qq_41202237/article/details/108481889&#34;&gt;https://blog.csdn.net/qq_41202237/article/details/108481889&lt;/a&gt;] &lt;a href=&#34;#fnref1&#34; class=&#34;footnote-backref&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn1&#34; class=&#34;footnote-item&#34;&gt;&lt;p&gt;[一篇博客弄懂 Unlink]  (&lt;a href=&#34;https://blog.csdn.net/qq_41202237/article/details/108481889&#34;&gt;https://blog.csdn.net/qq_41202237/article/details/108481889&lt;/a&gt;) &lt;a href=&#34;#fnref1&#34; class=&#34;footnote-backref&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;
