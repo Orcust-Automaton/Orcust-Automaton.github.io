@@ -41,7 +41,7 @@
 &lt;p&gt;我们在利用格式化字符串进行泄露时，我们可以动态调试一下，去看看栈上有哪些可以利用的地方，并且格式化字符串也并不是一次只能泄露出一个地址，我们可以贪心地把我们需要的栈上变量都泄露出来&lt;/p&gt;
 &lt;p&gt;这里我们寻找栈上的变量直接发现第 10 个和第 14 个就是我们需要泄露的数据，（当然这里也可以找别的，只要能算出来就行…），又由于 64 位传参，前 6 个参数不在栈上所以是 10 + 6-1 和 14 + 6-1 为什么 - 1 懂的都懂&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;%15&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;p&lt;/mi&gt;&lt;mo separator=&#34;true&#34;&gt;,&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;p,%19&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.625em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;mpunct&#34;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;p&lt;/p&gt;
+&lt;p&gt;%15$p,%19$p&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;center&gt;&lt;img src=&#34;/CTF/%E8%AE%B0%E4%B8%80%E9%81%93Unlink/4.png&#34;&gt;&lt;/center&gt;
 &lt;p&gt;泄露之后我们就可以把开 PIE 后的基地址算出来，最后把指针数组的地址算出来就可以进行下一步利用了；&lt;/p&gt;

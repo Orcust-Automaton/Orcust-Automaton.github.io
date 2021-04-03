@@ -6,7 +6,7 @@
  font-family: 'JetBrains Mono';
  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
 }</style><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="-NIYAH-" type="application/atom+xml">
-</head><body><header><nav><a href="/">Home</a><a href="/about/">About</a><a href="/friends/">Friends</a><a href="/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><div id="post-info"><span>date:<time datetime="2021-04-02T14:10:27.000Z" id="date"> 2021-04-02</time></span><br><span>updated:<time datetime="2021-04-03T14:22:11.727Z" id="updated"> 2021-04-03</time></span></div><h1>记一道Unlink</h1><hr></div><div id="post-content"><h1 id="axb_2019_heap"><a class="markdownIt-Anchor" href="#axb_2019_heap">#</a> axb_2019_heap</h1>
+</head><body><header><nav><a href="/">Home</a><a href="/about/">About</a><a href="/friends/">Friends</a><a href="/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><div id="post-info"><span>date:<time datetime="2021-04-02T14:10:27.000Z" id="date"> 2021-04-02</time></span><br><span>updated:<time datetime="2021-04-03T14:30:58.968Z" id="updated"> 2021-04-03</time></span></div><h1>记一道Unlink</h1><hr></div><div id="post-content"><h1 id="axb_2019_heap"><a class="markdownIt-Anchor" href="#axb_2019_heap">#</a> axb_2019_heap</h1>
 <h2 id="初探"><a class="markdownIt-Anchor" href="#初探">#</a> 初探</h2>
 <p>保护全开，特别哈人</p>
 <center><img src="/CTF/%E8%AE%B0%E4%B8%80%E9%81%93Unlink/1.png"></center>
@@ -18,7 +18,7 @@
 <p>我们在利用格式化字符串进行泄露时，我们可以动态调试一下，去看看栈上有哪些可以利用的地方，并且格式化字符串也并不是一次只能泄露出一个地址，我们可以贪心地把我们需要的栈上变量都泄露出来</p>
 <p>这里我们寻找栈上的变量直接发现第 10 个和第 14 个就是我们需要泄露的数据，（当然这里也可以找别的，只要能算出来就行…），又由于 64 位传参，前 6 个参数不在栈上所以是 10 + 6-1 和 14 + 6-1 为什么 - 1 懂的都懂</p>
 <blockquote>
-<p>%15<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">p,%19</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">p</span><span class="mpunct">,</span></span></span></span>p</p>
+<p>%15$p,%19$p</p>
 </blockquote>
 <center><img src="/CTF/%E8%AE%B0%E4%B8%80%E9%81%93Unlink/4.png"></center>
 <p>泄露之后我们就可以把开 PIE 后的基地址算出来，最后把指针数组的地址算出来就可以进行下一步利用了；</p>
