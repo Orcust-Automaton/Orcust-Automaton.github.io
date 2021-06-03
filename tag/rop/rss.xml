@@ -17,6 +17,7 @@
         <category>shellcode</category>
         <category>unlink</category>
         <category>DASCTF</category>
+        <category>IO_FILE</category>
         <item>
             <guid isPermalink="true">http://niyah.cn/CTF/%E5%9F%BA%E6%9C%ACROP/</guid>
             <title>基本ROP</title>

@@ -17,6 +17,7 @@
         <category>shellcode</category>
         <category>unlink</category>
         <category>DASCTF</category>
+        <category>IO_FILE</category>
         <item>
             <guid isPermalink="true">http://niyah.cn/CTF/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE/</guid>
             <title>虚拟机pwn环境配置</title>

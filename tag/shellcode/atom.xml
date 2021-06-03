@@ -14,6 +14,7 @@
     <category term="shellcode" />
     <category term="unlink" />
     <category term="DASCTF" />
+    <category term="IO_FILE" />
     <entry>
         <id>http://niyah.cn/CTF/shellcode%E4%BE%8B%E9%A2%98/</id>
         <title>shellcode例题</title>

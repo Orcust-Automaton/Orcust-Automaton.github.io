@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://niyah.cn/CTF/NewCTF/</loc>
+    
+    <lastmod>2021-06-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://niyah.cn/CTF/DASCTFxBuuctf%E4%BA%94%E6%9C%88%E5%A4%A7%E8%81%94%E5%8A%A8/</loc>
     
     <lastmod>2021-06-03</lastmod>
@@ -159,6 +166,13 @@
   
   <url>
     <loc>http://niyah.cn/tags/DASCTF/</loc>
+    <lastmod>2021-06-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/IO-FILE/</loc>
     <lastmod>2021-06-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

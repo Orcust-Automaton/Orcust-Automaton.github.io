@@ -17,6 +17,7 @@
         <category>shellcode</category>
         <category>unlink</category>
         <category>DASCTF</category>
+        <category>IO_FILE</category>
         <item>
             <guid isPermalink="true">http://niyah.cn/CTF/DASCTFxBuuctf%E4%BA%94%E6%9C%88%E5%A4%A7%E8%81%94%E5%8A%A8/</guid>
             <title>DASCTFxBuuctf五月大联动</title>
