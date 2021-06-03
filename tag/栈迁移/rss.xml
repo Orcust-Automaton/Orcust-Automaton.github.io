@@ -16,6 +16,7 @@
         <category>堆</category>
         <category>shellcode</category>
         <category>unlink</category>
+        <category>DASCTF</category>
         <item>
             <guid isPermalink="true">http://niyah.cn/CTF/%E6%A0%88%E8%BF%81%E7%A7%BB/</guid>
             <title>栈迁移</title>

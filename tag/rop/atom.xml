@@ -13,6 +13,7 @@
     <category term="堆" />
     <category term="shellcode" />
     <category term="unlink" />
+    <category term="DASCTF" />
     <entry>
         <id>http://niyah.cn/CTF/%E5%9F%BA%E6%9C%ACROP/</id>
         <title>基本ROP</title>

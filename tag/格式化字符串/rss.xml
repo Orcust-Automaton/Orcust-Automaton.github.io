@@ -16,6 +16,7 @@
         <category>堆</category>
         <category>shellcode</category>
         <category>unlink</category>
+        <category>DASCTF</category>
         <item>
             <guid isPermalink="true">http://niyah.cn/CTF/%E8%AE%B0%E4%B8%80%E9%81%93Unlink/</guid>
             <title>记一道Unlink</title>
