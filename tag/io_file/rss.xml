@@ -5,8 +5,8 @@
         <link>http://niyah.cn</link>
         <description>Niyah</description>
         <language>cn</language>
-        <pubDate>Thu, 03 Jun 2021 22:10:27 +0800</pubDate>
-        <lastBuildDate>Thu, 03 Jun 2021 22:10:27 +0800</lastBuildDate>
+        <pubDate>Fri, 04 Jun 2021 22:10:27 +0800</pubDate>
+        <lastBuildDate>Fri, 04 Jun 2021 22:10:27 +0800</lastBuildDate>
         <category>CTF</category>
         <category>PWN</category>
         <category>BUUCTF</category>
@@ -28,7 +28,7 @@
             <category>格式化字符串</category>
             <category>堆</category>
             <category>IO_FILE</category>
-            <pubDate>Thu, 03 Jun 2021 22:10:27 +0800</pubDate>
+            <pubDate>Fri, 04 Jun 2021 22:10:27 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;终于调完了，写的 b 脚本把错误 catch 了导致一直找不到某个铸币错误，导致调了半天&lt;/p&gt;
 &lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
 &lt;h1 id=&#34;qiandao&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#qiandao&#34;&gt;#&lt;/a&gt; qiandao&lt;/h1&gt;
