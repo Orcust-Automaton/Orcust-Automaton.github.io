@@ -18,6 +18,8 @@
         <category>unlink</category>
         <category>DASCTF</category>
         <category>IO_FILE</category>
+        <category>PWNHUB</category>
+        <category>UAF</category>
         <item>
             <guid isPermalink="true">http://niyah.cn/CTF/NewCTF/</guid>
             <title>NewCTF</title>
