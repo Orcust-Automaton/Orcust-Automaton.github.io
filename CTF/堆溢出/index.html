@@ -6,7 +6,7 @@
  font-family: 'JetBrains Mono';
  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
 }</style><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="-NIYAH-" type="application/atom+xml">
-</head><body><header><nav><a href="/">Home</a><a href="/about/">About</a><a href="/friends/">Friends</a><a href="/archives/">Archives</a><a href="/work/">Work</a></nav></header><main><article><div id="post-bg"><div id="post-title"><div id="post-info"><span>date:<time datetime="2021-02-26T06:10:27.000Z" id="date"> 2021-02-26</time></span><br><span>updated:<time datetime="2021-02-28T05:46:56.410Z" id="updated"> 2021-02-28</time></span></div><h1>堆溢出</h1><hr></div><div id="post-content"><h2 id="summoner"><a class="markdownIt-Anchor" href="#summoner">#</a> Summoner</h2>
+</head><body><header><nav><a href="/">Home</a><a href="/about/">About</a><a href="/friends/">Friends</a><a href="/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><div id="post-info"><span>date:<time datetime="2021-02-26T06:10:27.000Z" id="date"> 2021-02-26</time></span><br><span>updated:<time datetime="2021-02-28T05:46:56.410Z" id="updated"> 2021-02-28</time></span></div><h1>堆溢出</h1><hr></div><div id="post-content"><h2 id="summoner"><a class="markdownIt-Anchor" href="#summoner">#</a> Summoner</h2>
 <h3 id="热知识"><a class="markdownIt-Anchor" href="#热知识">#</a> 热知识</h3>
 <blockquote>
 <p>​	在做这道题目之前，我们首先需要了解一些堆的基本概念，堆不同于栈，栈在程序运行时会自己出现，堆是动态分配的 (由操作系统内核或者堆管理器)，只有在程序中需要时才会分配。在 CTF 的 pwn 中，栈是程序加载进内存后就会出现，而堆是由<kbd>malloc</kbd>、<kbd>alloc</kbd>、<kbd>realloc </kbd>函数分配内存后才会出现。</p>

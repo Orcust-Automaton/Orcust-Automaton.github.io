@@ -6,7 +6,7 @@
  font-family: 'JetBrains Mono';
  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
 }</style><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="-NIYAH-" type="application/atom+xml">
-</head><body><header><nav><a href="/">Home</a><a href="/about/">About</a><a href="/friends/">Friends</a><a href="/archives/">Archives</a><a href="/work/">Work</a></nav></header><main><article><div id="post-bg"><div id="post-title"><div id="post-info"><span>date:<time datetime="2021-07-06T02:10:27.000Z" id="date"> 2021-07-06</time></span><br><span>updated:<time datetime="2021-07-06T02:46:42.208Z" id="updated"> 2021-07-06</time></span></div><h1>七月PWNHUB公开赛</h1><hr></div><div id="post-content"><h1 id="mynote"><a class="markdownIt-Anchor" href="#mynote">#</a> Mynote</h1>
+</head><body><header><nav><a href="/">Home</a><a href="/about/">About</a><a href="/friends/">Friends</a><a href="/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><div id="post-info"><span>date:<time datetime="2021-07-06T02:10:27.000Z" id="date"> 2021-07-06</time></span><br><span>updated:<time datetime="2021-07-06T02:46:42.208Z" id="updated"> 2021-07-06</time></span></div><h1>七月PWNHUB公开赛</h1><hr></div><div id="post-content"><h1 id="mynote"><a class="markdownIt-Anchor" href="#mynote">#</a> Mynote</h1>
 <p>Libc-2.27.so 下的 uaf，而且是有 tcache double free 的版本，利用起来比较简单，程序没有给 edit</p>
 <p>将一个大于 fastbin 的堆块连续 free 7 次将 tcache 填满，之后再 free 一个该大小的堆块就可以泄露出 libc 地址</p>
 <p>之后的利用很简单，直接打 free_hook 就行</p>

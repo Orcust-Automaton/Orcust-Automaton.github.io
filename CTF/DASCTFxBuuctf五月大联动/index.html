@@ -6,7 +6,7 @@
  font-family: 'JetBrains Mono';
  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
 }</style><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="-NIYAH-" type="application/atom+xml">
-</head><body><header><nav><a href="/">Home</a><a href="/about/">About</a><a href="/friends/">Friends</a><a href="/archives/">Archives</a><a href="/work/">Work</a></nav></header><main><article><div id="post-bg"><div id="post-title"><div id="post-info"><span>date:<time datetime="2021-06-03T14:10:27.000Z" id="date"> 2021-06-03</time></span><br><span>updated:<time datetime="2021-06-03T10:12:09.263Z" id="updated"> 2021-06-03</time></span></div><h1>DASCTFxBuuctf五月大联动</h1><hr></div><div id="post-content"><h1 id="ticket"><a class="markdownIt-Anchor" href="#ticket">#</a> ticket</h1>
+</head><body><header><nav><a href="/">Home</a><a href="/about/">About</a><a href="/friends/">Friends</a><a href="/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><div id="post-info"><span>date:<time datetime="2021-06-03T14:10:27.000Z" id="date"> 2021-06-03</time></span><br><span>updated:<time datetime="2021-06-03T10:12:09.263Z" id="updated"> 2021-06-03</time></span></div><h1>DASCTFxBuuctf五月大联动</h1><hr></div><div id="post-content"><h1 id="ticket"><a class="markdownIt-Anchor" href="#ticket">#</a> ticket</h1>
 <p>libc-2.23 下的题目，漏洞点在于只要某个位置 + 6 的地方有值，就可以 free 该位置，之后将那个位置 + 6 位置清 0</p>
 <ol>
 <li>将输入信息的堆块申请两次，之后 free 掉 name 和（-2 和 - 1）再显示信息就可以泄露堆地址</li>
