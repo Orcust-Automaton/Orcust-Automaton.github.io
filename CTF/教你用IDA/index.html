@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>教你用IDA | -NIYAH-</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+
+    
+        <meta property="algolia:search" data-application-id="J7XB8WB9FZ" data-api-key="8f85e3019c85416686ccfe4fc498c065" data-index-name="Niyah">
+    
+
+    
+
+    
+
+    
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>/images/nia.jpg</text></svg>">
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1629946964125.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            valine: {
+                enable: true,
+                appId: "EWrkUk5e2JLQDjKa82Pt2dVH-gzGzoHsz",
+                appKey: "A0QQmMoivqHI4IF8skQ3ya5X",
+            },
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+    </script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="-NIYAH-" type="application/atom+xml">
+</head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/nia.jpg" alt="Niyah">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>-NIYAH-</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+                <a href="/friends">Friends</a>
+                
+                <a href="/about">About</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Orcust-Automaton">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                    <a href="/friends">Friends</a>
+                    
+                    <a href="/about">About</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cla1708d6004ja4oqafym0e95" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      教你用IDA
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2022-09-09T06:10:27.000Z" itemprop="datePublished">2022-09-09</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDA/" rel="tag">IDA</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <p>还得是你 IDA</p>
+<a id="more"></a>
+<h1 id="教你用ida"><a class="markdownIt-Anchor" href="#教你用ida">#</a> 教你用 IDA</h1>
+<p>还在为 IDA 反编译出的代码一坨答辩而烦恼吗，还在为玩不明白 IDA 而遭人鄙夷吗，那么今天来点大家想看的东西，只需 C 语言数据结构基础，教你调教出汉语言文学专业的妹妹都能看懂的代码</p>
+<h2 id="ida迷惑代码大赏"><a class="markdownIt-Anchor" href="#ida迷惑代码大赏">#</a> IDA 迷惑代码大赏</h2>
+<ol start="0">
+<li>首先介绍一下 IDA 里常见的屎，我们打开一道某城杯的 ez_linklist 题目</li>
+</ol>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220908173729472.png" alt="image-20220908173729472"></p>
+<ol>
+<li>点下 ok 找到 main 函数，映入眼帘就是一坨很经典的屎， <code>switch跳转表识别错误</code> ，属于是史里比较正常的一坨，这还不是很影响分析的部分</li>
+</ol>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220908173830651.png" alt="image-20220908173830651"></p>
+<ol start="2">
+<li>看一眼侧边栏，很经典的 <code>拿掉自定义的函数名</code> ，那么本程序的数据结构肯定也就没有了</li>
+</ol>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220908174053048.png" alt="image-20220908174053048"></p>
+<ol start="3">
+<li>我们向上逐个点进去看一眼，更是个寄吧， <code>各种解引用强转</code> 写的和一把米诺一样（恼），看起来就像是精神状态欠佳的人写出来的代码</li>
+</ol>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220908174307926.png" alt="image-20220908174307926"></p>
+<ol start="4">
+<li>接下来点进 puts 下面的函数， <code>call了不知道个什么b玩意</code> ，鉴定为纯纯的纯纯</li>
+</ol>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220908174456180.png" alt="image-20220908174456180"></p>
+<ol start="5">
+<li>这里面更是直接 <code>见红</code></li>
+</ol>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220908175347891.png" alt="image-20220908175347891"></p>
+<p>如果你也遇到了如上情况，别急，立刻点击右上角叉叉放弃本题（不是），请接着往下看</p>
+<h2 id="c语言变量复习"><a class="markdownIt-Anchor" href="#c语言变量复习">#</a> C 语言变量复习</h2>
+<p>正经复习环节，众所周知 c 语言有很多基本变量类型，比如 int char 也有数组等等</p>
+<p>有下面的变量</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> a<span class="token punctuation">;</span>
+<span class="token keyword">int</span> b<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
+<p>a 便是 int 类型的变量，b 是一个 int 数组，他们都是我们的常见类型</p>
+<ol>
+<li>
+<p>其中 a 实际上指向了一块地址所指的值，其 int 表示将 a 地址中的东西以 int 类型来解析出来，所以我们直接输出 a 可以输出  <code>a 存放的值</code></p>
+</li>
+<li>
+<p>而 b 指向了一块地址，其 int 表示 将 b 里面的数据用 int 类型解析出来，但是直接输出 b 不能输出  <code>b 存放的值</code> ，而是输出了  <code>b 的地址</code>  ，因为  <code>b</code>  本身就是一个地址，因此需要加上 b 后面的下标也就是 b [x] , 才能输出  <code>b 对应位置所存放的值</code> ，对 b 取索引的操作也同样是 <code>对 b 以 int 类型解引用</code></p>
+</li>
+</ol>
+<p>所以之后在单独使用变量时由于前面的声明：</p>
+<p><code>a的地址所指向的值</code> 被 c 语言直接当成了 a 的值 。</p>
+<p><code>b的地址</code> 被 c 语言当成了 b 的值，<strong>因此，我们也将 b 称之为指针</strong>。</p>
+<p>接下来我们对变量进行赋值并输出</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> b<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">114514</span><span class="token punctuation">,</span><span class="token number">1919</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>编译运行的结果如下，我们可以发现第二行的地址貌似有点怪嗷，我们的地址不是一般 0x7f 开头吗？</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token number">114514</span>
+<span class="token number">469523392</span>  以<span class="token number">16</span>进制表示 <span class="token number">0x1bfc5bc0</span></code></pre>
+<p>要是这么想那只能说你计算机的造纸不够高，注意看 % d 是将值以 int 类型输出，int 类型所占的长度仅为 4 字节，而地址长度在 64 位机是 8 字节， b 的地址又被当成了值，因此只能输出  <code>该地址的低4字节</code></p>
+<p>紧接着继续深入，我们知道 c 语言中的  <code>*</code>  处了乘号之外，还有一个功能就是解引用，也就是将地址里面的值给解出来，既然 b 作为一个地址，那么我们就可以将 b 地址所存放的值用 * 给他解出来</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> b<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">114514</span> <span class="token punctuation">,</span> <span class="token number">1919</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    	
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> <span class="token operator">*</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>输出结果</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token number">114514</span>
+<span class="token operator">-</span><span class="token number">879752048</span>
+<span class="token number">114514</span></code></pre>
+<p>我们又知道 b 数组的地址是连续的，那么我们可以通过加上偏移来实现索引不同位置的值，注意解引用的优先级是比加减要高的</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> b<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">114514</span> <span class="token punctuation">,</span> <span class="token number">1919</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> <span class="token operator">*</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span>b<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>输出结果</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token number">114514</span>
+<span class="token number">289332624</span>
+<span class="token number">114514</span>
+<span class="token number">1919</span></code></pre>
+<p>我们同样实现了取下标的效果，但是这个时候可能又有同学会发问，int 类型长度不是 4 吗？为啥 b + 1 就是 b [1] 呢 不应该是 b + 4 吗？</p>
+<p>那么还记得我们的声明吗，b 前面的 int 也不是没有作用的，这是让 c 语言知道 ，b 是一个 int 类型的指针</p>
+<p>接下来介绍强制转换， c 语言中的指针也有强制转换，比如我们 malloc 出来的地址默认是 void * 指针，它的粒度就是 1 字节，我们可以通过 (int *) 从而强制将其转化为 int 类型，从而让 c 语言认为他是一个 4 字节为单位的 int 类型的指针</p>
+<p>接着我们再回到上面的问题，我们将这个 b 指针首先强制转为 void * 类型，再在这个类型上 +4 偏移，其后再强转为 int * 类型并解引用出去，不就也可以输出对应地址偏移的值吗</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> b<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">114514</span> <span class="token punctuation">,</span> <span class="token number">1919</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    	
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> <span class="token operator">*</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span>b<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span>b<span class="token operator">+</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>输出结果</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token number">114514</span>
+<span class="token number">1692555520</span>
+<span class="token number">114514</span>
+<span class="token number">1919</span>
+<span class="token number">1919</span></code></pre>
+<blockquote>
+<p>另外，我们也可以得到如下等式</p>
+<p>a = b[-1] = *b-1 = *(int *)b-1 = *(int *)((void *)b-4)</p>
+</blockquote>
+<p>接下来介绍另一个运算符  <code>&amp;</code> ，这个运算符和  <code>*</code>  相反，&amp; 是取地址</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> b<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">114514</span> <span class="token punctuation">,</span> <span class="token number">1919</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> <span class="token operator">*</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span>b<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span>b<span class="token operator">+</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> <span class="token operator">&amp;</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span> <span class="token punctuation">,</span> <span class="token operator">*</span><span class="token operator">&amp;</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>输出结果</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token number">114514</span>
+<span class="token number">1006296128</span>
+<span class="token number">114514</span>
+<span class="token number">1919</span>
+<span class="token number">1919</span>
+<span class="token number">1006296124</span>
+<span class="token number">114514</span></code></pre>
+<p>可以看到最后面的两行，分别输出了 a 的地址和 a 的值，可以观察和上面的地址正好相差了 4 ，这也同时印证了 a 的长度是 4 并且 a 和 b 的地址是连续的，而最后一行 通过 &amp; * 两个运算符的使用 a 作为一个 int 值先取地址随后解引用，就又回到了它本身</p>
+<p>那么对 c 语言的复习先到此为止</p>
+<h2 id="把史包装成一坨能上餐桌的史"><a class="markdownIt-Anchor" href="#把史包装成一坨能上餐桌的史">#</a> 把史包装成一坨能上餐桌的史</h2>
+<h3 id="修复错误识别"><a class="markdownIt-Anchor" href="#修复错误识别">#</a> 修复错误识别</h3>
+<p>首先解决 call 很怪的问题，因为修复其涉及到 patch 程序，所以应该放到其他优化之前</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token punctuation">(</span>__fastcall <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>sub_1268 <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>上面的错误便是 IDA 对函数的错误识别，点进函数切换到汇编视图可以看到下面一大片没有被 IDA 识别到而显示出了触目惊心的红色</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909220207604.png" alt="image-20220909220207604"></p>
+<p>显然是上面的汇编片段出现了问题，在 push rbp 指令之前还有几条指令，在此之后的识别全部出错，所以，可以使用 IDA keypatch 插件将 push rbp 之前的指令全部 nop 掉</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909220626269.png" alt="image-20220909220626269"></p>
+<p>保存后再打开已经不见红了</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909220950629.png" alt="image-20220909220950629"></p>
+<p>说明函数也自动被识别成功</p>
+<h3 id="修复switch跳转表"><a class="markdownIt-Anchor" href="#修复switch跳转表">#</a> 修复 switch 跳转表</h3>
+<p>这算是 IDA 里的一个老坑了，反正就这么几个选项，觉得不影响的可以不去修复</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909221433356.png" alt="image-20220909221433356"></p>
+<p>同样是切到汇编视图</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909221545213.png" alt="image-20220909221545213"></p>
+<p>这里首先执行了 lea rdx, unk_2110 命令，我们点进这个地址去看，是 data 段的一条数据</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909221813011.png" alt="image-20220909221813011"></p>
+<p>我们将上面的数据按 D 转换成 4 字节一组，那么这其实就是调转表了，可以看到其中有 6 个元素</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909222033990.png" alt="image-20220909222033990"></p>
+<p>我们再回到汇编处，这里光标选中刚刚改好的这个地址点进 Edit -&gt; Other -&gt; Specify switch idiom</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909223205678.png" alt="image-20220909223205678"></p>
+<p>会出现如下对话框</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909231432443.png" alt="image-20220909231432443"></p>
+<blockquote>
+<p>Number of elements ：跳转元素个数，这个例子是 6</p>
+<p>Size of table element ：跳转表每个元素长度，这里是 4</p>
+<p>Element base value ：这里和第一个相同即可</p>
+<p>Input register of switch ：跳转到的寄存器，这里是 rax</p>
+<p>Default jump address ：默认跳转地址，这里可以看到下面的 “Bad choice”，或者直接点，最后一个就行</p>
+<p>Signed jump table elements ：如果上面看到的跳转表是负数则需要勾选此选项，比如之前看到的数据是 0xff 开头</p>
+</blockquote>
+<p>或者按照大佬的一图流来也可以</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909231230923.png" alt="image-20220909231230923"></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/huzai9527/article/details/121204850">IDA 修复跳表_huzai9527 的博客 - CSDN 博客_ida switch 修复</a></p>
+<p>这个时候在打开 main 可以看到已经修复了</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909231708468.png" alt="image-20220909231708468"></p>
+<h3 id="重命名函数和变量"><a class="markdownIt-Anchor" href="#重命名函数和变量">#</a> 重命名函数和变量</h3>
+<p>我们看到的函数，变量名全是将符号表给拿掉的，我们可以通过自己的理解和命名习惯对其重命名</p>
+<p>ida  <code>快捷键 n</code> ， 在变量名或者函数名处按 n 便可以对函数进行重命名</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909215650052.png" alt="image-20220909215650052"></p>
+<p>以 add 函数为例，初步更改变量名后</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> i<span class="token punctuation">;</span> <span class="token comment">// [rsp+0h] [rbp-10h]</span>
+  <span class="token keyword">int</span> choice<span class="token punctuation">;</span> <span class="token comment">// [rsp+4h] [rbp-Ch]</span>
+  <span class="token keyword">void</span> <span class="token operator">*</span>buf<span class="token punctuation">;</span> <span class="token comment">// [rsp+8h] [rbp-8h]</span>
+
+  <span class="token keyword">for</span> <span class="token punctuation">(</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">15</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>ptr_list <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">)</span>
+    <span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> i <span class="token operator">></span> <span class="token number">15</span> <span class="token punctuation">)</span>
+    <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Too many link list"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Size:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  choice <span class="token operator">=</span> <span class="token function">get_num</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> choice <span class="token operator">></span> <span class="token number">0x70</span> <span class="token operator">||</span> choice <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+    <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"wrong size!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  buf <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span>choice<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>ptr_list <span class="token operator">+</span> i<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">0x18uLL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">*</span><span class="token punctuation">(</span>_DWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>ptr_list <span class="token operator">+</span> i<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">8LL</span><span class="token punctuation">)</span> <span class="token operator">=</span> choice<span class="token punctuation">;</span>
+  <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>ptr_list <span class="token operator">+</span> i<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">16LL</span><span class="token punctuation">)</span> <span class="token operator">=</span> buf<span class="token punctuation">;</span>
+  <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>ptr_list <span class="token operator">+</span> i<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0LL</span><span class="token punctuation">;</span>
+  count<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Content:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">your_read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Success"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>可以看到如上的代码可读性好了一些些了，按照自己的理解继续命名其他函数</p>
+<h3 id="修复强制转换"><a class="markdownIt-Anchor" href="#修复强制转换">#</a> 修复强制转换</h3>
+<p>观察到上面代码中存在着很多这种扎眼的代码</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>ptr_list <span class="token operator">+</span> i<span class="token punctuation">)</span></code></pre>
+<p>按照我们回顾的 c 语言知识，这里看看 ptr_list 的变量类型为  <code>_QWORD</code>  ，它并非一个常见的类型，不过从名字可以看出它就是一个 4 字 也就是 8 字节 长度的变量，首先将其取地址，随后转化为  <code>_QWORD</code>  指针，之后加上偏移，再解引用</p>
+<p>注意这里别被他绕进去，先取地址再转化为指针，这个时候已经变成地址了，再解引用就又回到了那个值本身，只不过加上了偏移，因此，这不就是之前所说道的数组吗？</p>
+<p>ida  <code>快捷键 y</code> ， 在变量名或者函数名处按 y 便可以对函数进行类型修改</p>
+<p>将其修改为长度为 16 的数组后，代码如下，更像人写的了</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909233100532.png" alt="image-20220909233100532"></p>
+<p>我们再思考一下，malloc 返回的是一个指针，因此用来接收它的数组也是一个指针数组，那么将其修改为指针数组</p>
+<p>可以看到，上面对应偏移存放着不同的值，那么不用怀疑，这个指针应该对应着某种结构体，在隔壁 structues 使用  <code>insert</code>  新插入一个结构体，注意到上面 malloc 大小为 0x18，新建如下数组</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909233810069.png" alt="image-20220909233810069"></p>
+<p>那么接下来就可以将其修改为我们新建结构体的变量类型了</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909233926778.png" alt="image-20220909233926778"></p>
+<p>出现了结构体指针的标志性 -&gt; 符</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909233950113.png" alt="image-20220909233950113"></p>
+<p>同时也发现了 LODWORD 这个操作符，出现这个的原因是结构体部分元素粒度不够细，将对应元素拆分成长度更小的元素就行，如下图，按  <code>d</code>  将一个 qd 拆分成两个 dd</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909234257485.png" alt="image-20220909234257485"></p>
+<p>再回来已经非常接近人类写的代码了</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909234356672.png" alt="image-20220909234356672"></p>
+<p>再重新重命名一下自定义结构体的各个元素</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> i<span class="token punctuation">;</span> <span class="token comment">// [rsp+0h] [rbp-10h]</span>
+  <span class="token keyword">int</span> size<span class="token punctuation">;</span> <span class="token comment">// [rsp+4h] [rbp-Ch]</span>
+  <span class="token keyword">char</span> <span class="token operator">*</span>buf<span class="token punctuation">;</span> <span class="token comment">// [rsp+8h] [rbp-8h]</span>
+
+  <span class="token keyword">for</span> <span class="token punctuation">(</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">15</span> <span class="token operator">&amp;&amp;</span> ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">)</span>
+    <span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> i <span class="token operator">></span> <span class="token number">15</span> <span class="token punctuation">)</span>
+    <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Too many link list"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Size:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  size <span class="token operator">=</span> <span class="token function">get_num</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> size <span class="token operator">></span> <span class="token number">0x70</span> <span class="token operator">||</span> size <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+    <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"wrong size!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  buf <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span>size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>node <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">0x18uLL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-></span>size <span class="token operator">=</span> size<span class="token punctuation">;</span>
+  ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-></span>data <span class="token operator">=</span> buf<span class="token punctuation">;</span>
+  ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-></span>field_0 <span class="token operator">=</span> <span class="token number">0LL</span><span class="token punctuation">;</span>
+  count<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Content:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">your_read</span><span class="token punctuation">(</span>ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-></span>data<span class="token punctuation">,</span> ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-></span>size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Success"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>可以看到这段代码贴进代码块已经没有什么违和感了，但该结构体还有一个疑点，我们可以进入其他函数继续分析</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">link</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> i<span class="token punctuation">;</span> <span class="token comment">// [rsp+Ch] [rbp-14h]</span>
+  <span class="token keyword">int</span> idx1<span class="token punctuation">;</span> <span class="token comment">// [rsp+10h] [rbp-10h]</span>
+  <span class="token keyword">int</span> idx2<span class="token punctuation">;</span> <span class="token comment">// [rsp+14h] [rbp-Ch]</span>
+  node <span class="token operator">*</span>ptr<span class="token punctuation">;</span> <span class="token comment">// [rsp+18h] [rbp-8h]</span>
+
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"link from:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  idx1 <span class="token operator">=</span> <span class="token function">get_num</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>ptr_list<span class="token punctuation">[</span>idx1<span class="token punctuation">]</span> <span class="token operator">||</span> idx1 <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> idx1 <span class="token operator">></span> <span class="token number">15</span> <span class="token punctuation">)</span>
+    <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Bad node"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"link to:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  idx2 <span class="token operator">=</span> <span class="token function">get_num</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>ptr_list<span class="token punctuation">[</span>idx2<span class="token punctuation">]</span> <span class="token operator">||</span> idx2 <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> idx2 <span class="token operator">></span> <span class="token number">15</span> <span class="token punctuation">)</span>
+    <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Bad node"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  ptr <span class="token operator">=</span> ptr_list<span class="token punctuation">[</span>idx1<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> count<span class="token punctuation">[</span>idx1<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">)</span>
+    ptr <span class="token operator">=</span> <span class="token punctuation">(</span>node <span class="token operator">*</span><span class="token punctuation">)</span>ptr<span class="token operator">-></span>field_0<span class="token punctuation">;</span>
+  ptr<span class="token operator">-></span>field_0 <span class="token operator">=</span> <span class="token punctuation">(</span>__int64<span class="token punctuation">)</span>ptr_list<span class="token punctuation">[</span>idx2<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  count<span class="token punctuation">[</span>idx1<span class="token punctuation">]</span> <span class="token operator">+=</span> count<span class="token punctuation">[</span>idx2<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  count<span class="token punctuation">[</span>idx2<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  ptr_list<span class="token punctuation">[</span>idx2<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0LL</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Success!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>函数逻辑比较简单，看到这里，也已经知道这个 field_0 就相当于节点的 next 指针了，指向了下一个节点，因此这个元素的类型是  <code>我们创造的结构体指针类型</code> ，元素名无所谓，就叫他 next 吧，改名并修改 类型</p>
+<p><img src="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/image-20220909235245037.png" alt="image-20220909235245037"></p>
+<p>至此，本题的数据结构以及逻辑全部弄清楚了，接着可以跟随自己的习惯优化代码</p>
+<h2 id="高质量代码鉴赏环节"><a class="markdownIt-Anchor" href="#高质量代码鉴赏环节">#</a> 高质量代码鉴赏环节</h2>
+<p>题目名 ez_linklist</p>
+<h3 id="main"><a class="markdownIt-Anchor" href="#main">#</a> main</h3>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> __fastcall __noreturn <span class="token function">main</span><span class="token punctuation">(</span>__int64 a1<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>a2<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>a3<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token keyword">unsigned</span> <span class="token keyword">int</span> choice<span class="token punctuation">;</span> <span class="token comment">// [rsp+Ch] [rbp-4h]</span>
+
+  <span class="token function">setvbuf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span> <span class="token number">2</span> <span class="token punctuation">)</span>
+  <span class="token punctuation">&#123;</span>
+    choice <span class="token operator">=</span> <span class="token function">menu</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> choice <span class="token operator">&lt;=</span> <span class="token number">5</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+      <span class="token keyword">switch</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> __int64<span class="token punctuation">)</span>table <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>table<span class="token punctuation">[</span>choice<span class="token punctuation">]</span> <span class="token punctuation">)</span>
+      <span class="token punctuation">&#123;</span>
+        <span class="token keyword">case</span> <span class="token number">1uLL</span><span class="token operator">:</span>
+          <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">continue</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">2uLL</span><span class="token operator">:</span>
+          <span class="token function">delete</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">continue</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">3uLL</span><span class="token operator">:</span>
+          <span class="token function">link</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">continue</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">4uLL</span><span class="token operator">:</span>
+          <span class="token function">unlink</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">continue</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">5uLL</span><span class="token operator">:</span>
+          <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">default</span><span class="token operator">:</span>
+          <span class="token keyword">goto</span> LABEL_9<span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">break</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+LABEL_9<span class="token operator">:</span>
+  <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Bad choice"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h3 id="add"><a class="markdownIt-Anchor" href="#add">#</a> add</h3>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> i<span class="token punctuation">;</span> <span class="token comment">// [rsp+0h] [rbp-10h]</span>
+  <span class="token keyword">int</span> size<span class="token punctuation">;</span> <span class="token comment">// [rsp+4h] [rbp-Ch]</span>
+  <span class="token keyword">char</span> <span class="token operator">*</span>buf<span class="token punctuation">;</span> <span class="token comment">// [rsp+8h] [rbp-8h]</span>
+
+  <span class="token keyword">for</span> <span class="token punctuation">(</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">15</span> <span class="token operator">&amp;&amp;</span> ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">)</span>
+    <span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> i <span class="token operator">></span> <span class="token number">15</span> <span class="token punctuation">)</span>
+    <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Too many link list"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Size:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  size <span class="token operator">=</span> <span class="token function">get_num</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> size <span class="token operator">></span> <span class="token number">0x70</span> <span class="token operator">||</span> size <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+    <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"wrong size!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  buf <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span>size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>node <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">0x18uLL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-></span>size <span class="token operator">=</span> size<span class="token punctuation">;</span>
+  ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-></span>data <span class="token operator">=</span> buf<span class="token punctuation">;</span>
+  ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-></span>next <span class="token operator">=</span> <span class="token number">0LL</span><span class="token punctuation">;</span>
+  count<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Content:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">your_read</span><span class="token punctuation">(</span>ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-></span>data<span class="token punctuation">,</span> ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-></span>size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Success"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h3 id="link"><a class="markdownIt-Anchor" href="#link">#</a> link</h3>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">link</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> i<span class="token punctuation">;</span> <span class="token comment">// [rsp+Ch] [rbp-14h]</span>
+  <span class="token keyword">int</span> idx1<span class="token punctuation">;</span> <span class="token comment">// [rsp+10h] [rbp-10h]</span>
+  <span class="token keyword">int</span> idx2<span class="token punctuation">;</span> <span class="token comment">// [rsp+14h] [rbp-Ch]</span>
+  node <span class="token operator">*</span>ptr<span class="token punctuation">;</span> <span class="token comment">// [rsp+18h] [rbp-8h]</span>
+
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"link from:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  idx1 <span class="token operator">=</span> <span class="token function">get_num</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>ptr_list<span class="token punctuation">[</span>idx1<span class="token punctuation">]</span> <span class="token operator">||</span> idx1 <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> idx1 <span class="token operator">></span> <span class="token number">15</span> <span class="token punctuation">)</span>
+    <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Bad node"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"link to:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  idx2 <span class="token operator">=</span> <span class="token function">get_num</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>ptr_list<span class="token punctuation">[</span>idx2<span class="token punctuation">]</span> <span class="token operator">||</span> idx2 <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> idx2 <span class="token operator">></span> <span class="token number">15</span> <span class="token punctuation">)</span>
+    <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Bad node"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  ptr <span class="token operator">=</span> ptr_list<span class="token punctuation">[</span>idx1<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> count<span class="token punctuation">[</span>idx1<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">)</span>
+    ptr <span class="token operator">=</span> ptr<span class="token operator">-></span>next<span class="token punctuation">;</span>
+  ptr<span class="token operator">-></span>next <span class="token operator">=</span> ptr_list<span class="token punctuation">[</span>idx2<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  count<span class="token punctuation">[</span>idx1<span class="token punctuation">]</span> <span class="token operator">+=</span> count<span class="token punctuation">[</span>idx2<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  count<span class="token punctuation">[</span>idx2<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  ptr_list<span class="token punctuation">[</span>idx2<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0LL</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Success!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h3 id="unlink"><a class="markdownIt-Anchor" href="#unlink">#</a> unlink</h3>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">unlink</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> i<span class="token punctuation">;</span> <span class="token comment">// [rsp+8h] [rbp-18h]</span>
+  <span class="token keyword">int</span> j<span class="token punctuation">;</span> <span class="token comment">// [rsp+Ch] [rbp-14h]</span>
+  <span class="token keyword">int</span> idx<span class="token punctuation">;</span> <span class="token comment">// [rsp+10h] [rbp-10h]</span>
+  <span class="token keyword">int</span> offset<span class="token punctuation">;</span> <span class="token comment">// [rsp+14h] [rbp-Ch]</span>
+  node <span class="token operator">*</span>ptr<span class="token punctuation">;</span> <span class="token comment">// [rsp+18h] [rbp-8h]</span>
+
+  <span class="token keyword">for</span> <span class="token punctuation">(</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">15</span> <span class="token operator">&amp;&amp;</span> ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">)</span>
+    <span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> i <span class="token operator">></span> <span class="token number">15</span> <span class="token punctuation">)</span>
+    <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Too many link list"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Index:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  idx <span class="token operator">=</span> <span class="token function">get_num</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>ptr_list<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">||</span> idx <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> idx <span class="token operator">></span> <span class="token number">15</span> <span class="token punctuation">)</span>
+    <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Bad idx"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> count<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">)</span>
+    <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"This list has only one node."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">check</span><span class="token punctuation">(</span>idx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Input offset:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  offset <span class="token operator">=</span> <span class="token function">get_num</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> offset <span class="token operator">>=</span> count<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">||</span> offset <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+    <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Bad offset"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> offset <span class="token punctuation">)</span>
+  <span class="token punctuation">&#123;</span>
+    ptr <span class="token operator">=</span> ptr_list<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> offset <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token operator">++</span>j <span class="token punctuation">)</span>
+      ptr <span class="token operator">=</span> ptr<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> ptr<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    ptr<span class="token operator">-></span>next <span class="token operator">=</span> ptr<span class="token operator">-></span>next<span class="token operator">-></span>next<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">else</span>
+  <span class="token punctuation">&#123;</span>
+    ptr_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> ptr_list<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    ptr_list<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">=</span> ptr_list<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token operator">-></span>next<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token operator">--</span>count<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  count<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Success"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h3 id="delete"><a class="markdownIt-Anchor" href="#delete">#</a> delete</h3>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">delete</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  _DWORD <span class="token operator">*</span>res<span class="token punctuation">;</span> <span class="token comment">// rax</span>
+  <span class="token keyword">int</span> i<span class="token punctuation">;</span> <span class="token comment">// [rsp+4h] [rbp-2Ch]</span>
+  <span class="token keyword">int</span> idx<span class="token punctuation">;</span> <span class="token comment">// [rsp+8h] [rbp-28h]</span>
+  <span class="token keyword">int</span> offset<span class="token punctuation">;</span> <span class="token comment">// [rsp+Ch] [rbp-24h]</span>
+  node <span class="token operator">*</span>ptr<span class="token punctuation">;</span> <span class="token comment">// [rsp+10h] [rbp-20h]</span>
+  node <span class="token operator">*</span>p<span class="token punctuation">;</span> <span class="token comment">// [rsp+18h] [rbp-18h]</span>
+  node <span class="token operator">*</span>next<span class="token punctuation">;</span> <span class="token comment">// [rsp+20h] [rbp-10h]</span>
+  node <span class="token operator">*</span>buf<span class="token punctuation">;</span> <span class="token comment">// [rsp+28h] [rbp-8h]</span>
+
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Index"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  idx <span class="token operator">=</span> <span class="token function">get_num</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>ptr_list<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">||</span> idx <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> idx <span class="token operator">></span> <span class="token number">15</span> <span class="token punctuation">)</span>
+    <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Bad idx"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">check</span><span class="token punctuation">(</span>idx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Input offset:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  offset <span class="token operator">=</span> <span class="token function">get_num</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> offset <span class="token operator">==</span> <span class="token number">0xFF</span> <span class="token punctuation">)</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> ptr <span class="token operator">=</span> ptr_list<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token punctuation">;</span> ptr<span class="token punctuation">;</span> ptr <span class="token operator">=</span> next <span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+      next <span class="token operator">=</span> ptr<span class="token operator">-></span>next<span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>ptr<span class="token operator">-></span>data <span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"What are you doing?"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">free</span><span class="token punctuation">(</span>ptr<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      ptr<span class="token operator">-></span>size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      ptr<span class="token operator">-></span>next <span class="token operator">=</span> <span class="token number">0LL</span><span class="token punctuation">;</span>
+      ptr<span class="token operator">-></span>data <span class="token operator">=</span> <span class="token number">0LL</span><span class="token punctuation">;</span>
+      <span class="token function">free</span><span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    ptr_list<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0LL</span><span class="token punctuation">;</span>
+    res <span class="token operator">=</span> count<span class="token punctuation">;</span>
+    count<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">else</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> offset <span class="token operator">>=</span> count<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">||</span> offset <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+      <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Bad offset"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    p <span class="token operator">=</span> ptr_list<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> offset <span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+      <span class="token keyword">for</span> <span class="token punctuation">(</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> offset <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">)</span>
+        p <span class="token operator">=</span> p<span class="token operator">-></span>next<span class="token punctuation">;</span>
+      buf <span class="token operator">=</span> p<span class="token operator">-></span>next<span class="token punctuation">;</span>
+      p<span class="token operator">-></span>next <span class="token operator">=</span> p<span class="token operator">-></span>next<span class="token operator">-></span>next<span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>buf<span class="token operator">-></span>data <span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"What are you doing?"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">free</span><span class="token punctuation">(</span>buf<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">free</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">&#123;</span>
+      ptr_list<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">=</span> ptr_list<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token operator">-></span>next<span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>p<span class="token operator">-></span>data <span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"What are you doing?"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">free</span><span class="token punctuation">(</span>p<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      p<span class="token operator">-></span>next <span class="token operator">=</span> <span class="token number">0LL</span><span class="token punctuation">;</span>
+      p<span class="token operator">-></span>size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      p<span class="token operator">-></span>data <span class="token operator">=</span> <span class="token number">0LL</span><span class="token punctuation">;</span>
+      <span class="token function">free</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span><span class="token operator">--</span>count<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token punctuation">)</span>
+      ptr_list<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0LL</span><span class="token punctuation">;</span>
+    <span class="token function">LODWORD</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Success"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>res<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>各个模块的可读性非常好（喜），可不要告诉我这样了还找不到洞（</p>
+<p>感兴趣的同学可以自己试着找一下洞，那么本期教你耍 IDA 就到此为止</p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-qwb-core/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          教你学内核-qwb-core
+        
+      </div>
+    </a>
+  
+  
+    <a href="/CTF/llvm%20pass%E5%85%A5%E9%97%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">llvm pass入门</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=教你用IDA - -NIYAH-&url=http://niyah.cn/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=教你用IDA - -NIYAH-&u=http://niyah.cn/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=教你用IDA - -NIYAH-&url=http://niyah.cn/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+<section class="comments">
+    <div id="valine-container"></div>
+</section>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Binary/">Binary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BUUCTF/" rel="tag">BUUCTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DASCTF/" rel="tag">DASCTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Das/" rel="tag">Das</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDA/" rel="tag">IDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO-FILE/" rel="tag">IO_FILE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLVM/" rel="tag">LLVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWN/" rel="tag">PWN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWNHUB/" rel="tag">PWNHUB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UAF/" rel="tag">UAF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwnable/" rel="tag">pwnable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rop/" rel="tag">rop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shellcode/" rel="tag">shellcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unlink/" rel="tag">unlink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A0%86/" rel="tag">堆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E7%BF%BC%E6%9D%AF/" rel="tag">天翼杯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%88%E8%BF%81%E7%A7%BB/" rel="tag">栈迁移</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">格式化字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A5%A5%E4%BA%91%E6%9D%AF/" rel="tag">祥云杯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E5%AE%89%E6%9D%AF/" rel="tag">长安杯</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-tty,seq/">教你学内核-tty,seq结构体利用</a>
+          </li>
+        
+          <li>
+            <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-linux%20kernel%20ROP%20%E4%B8%8B%E7%9A%84%E4%BF%9D%E6%8A%A4%E7%BB%95%E8%BF%87/">教你学内核-linux kernel ROP 下的保护绕过</a>
+          </li>
+        
+          <li>
+            <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-sudrv/">教你学内核-sudrv</a>
+          </li>
+        
+          <li>
+            <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-qwb-core/">教你学内核-qwb-core</a>
+          </li>
+        
+          <li>
+            <a href="/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/">教你用IDA</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            -NIYAH- &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1629946964125.js"></script>
+
+
+<script src="/dist/custom.js?1629946964125.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+</body>
+
+</html>

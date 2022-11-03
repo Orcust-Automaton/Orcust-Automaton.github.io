@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-tty,seq/</loc>
+    
+    <lastmod>2022-10-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-sudrv/</loc>
+    
+    <lastmod>2022-10-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/friends/index.html</loc>
+    
+    <lastmod>2022-10-12</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/about/index.html</loc>
+    
+    <lastmod>2022-10-12</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-qwb-core/</loc>
+    
+    <lastmod>2022-10-12</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-linux%20kernel%20ROP%20%E4%B8%8B%E7%9A%84%E4%BF%9D%E6%8A%A4%E7%BB%95%E8%BF%87/</loc>
+    
+    <lastmod>2022-10-12</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E6%95%99%E4%BD%A0%E7%94%A8IDA/</loc>
+    
+    <lastmod>2022-09-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/llvm%20pass%E5%85%A5%E9%97%A8/</loc>
+    
+    <lastmod>2022-09-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/IDA%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%93%E6%9E%84%E4%BD%93/</loc>
+    
+    <lastmod>2022-08-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/V&NCTF-WriteUp-Niyah/</loc>
+    
+    <lastmod>2022-07-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E5%A0%86%E6%BA%A2%E5%87%BA/</loc>
+    
+    <lastmod>2022-03-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E4%B8%83%E6%9C%88PWNHUB%E5%85%AC%E5%BC%80%E8%B5%9B/</loc>
+    
+    <lastmod>2022-02-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/pwnable%20calc%E9%A2%98%E8%A7%A3/</loc>
+    
+    <lastmod>2022-02-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/easybox-wp/</loc>
+    
+    <lastmod>2022-02-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/Fmyy_Challenge/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E9%80%82%E7%94%A8%E4%BA%8E%E9%AB%98%E7%89%88%E6%9C%AC%E7%9A%84house/</loc>
+    
+    <lastmod>2022-01-29</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/House-of-husk%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E8%AE%B0%E4%B8%80%E9%81%93Unlink/</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E6%A0%88%E8%BF%81%E7%A7%BB/</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E5%9F%BA%E6%9C%ACROP/</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/ZJCTF-2021-Pwn/</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/shellcode%E4%BE%8B%E9%A2%98/</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E7%A5%A5%E4%BA%91%E6%9D%AF%E9%83%A8%E5%88%86Pwn/</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E5%A4%A9%E7%BF%BC+%E9%95%BF%E5%AE%89+Das/</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E6%B2%A1%E6%9C%89_BUG_%E7%9A%84%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E8%BF%91%E6%9C%9FPwn%E9%A2%98/</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/NewCTF/</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/DASCTFxBuuctf%E4%BA%94%E6%9C%88%E5%A4%A7%E8%81%94%E5%8A%A8/</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/music/index.html</loc>
+    
+    <lastmod>2022-01-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/CTF/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE/</loc>
+    
+    <lastmod>2021-09-01</lastmod>
+    
+  </url>
+  
+
+  <url>
+    <loc>http://niyah.cn/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  
+  <url>
+    <loc>http://niyah.cn/tags/CTF/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/PWN/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/%E5%A0%86/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/BUUCTF/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/DASCTF/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/IDA/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/IO-FILE/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/%E6%A0%88/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/pwnable/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/rop/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/UAF/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/shellcode/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/PWNHUB/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/kernel/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/C%E8%AF%AD%E8%A8%80/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/%E6%A0%88%E8%BF%81%E7%A7%BB/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/unlink/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/%E9%95%BF%E5%AE%89%E6%9D%AF/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/%E5%A4%A9%E7%BF%BC%E6%9D%AF/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/Das/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/%E7%A5%A5%E4%BA%91%E6%9D%AF/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/tags/LLVM/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+
+  
+  <url>
+    <loc>http://niyah.cn/categories/%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/categories/Binary/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://niyah.cn/categories/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2022-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+</urlset>

